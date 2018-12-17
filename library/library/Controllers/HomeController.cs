@@ -21,6 +21,12 @@ namespace library.Controllers
 
             return View();
         }
+        public ActionResult SVK()
+        {
+
+
+            return View();
+        }
         [HttpGet]
         public JsonResult Index_library()
         {
@@ -54,6 +60,30 @@ namespace library.Controllers
                                 Вид_контакта = c.Наименование,
                                 контактные_данные = a.КонтактныеДанные,
                                 адрес = b.Адрес
+                            }).ToList();
+            return Json(num_info, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult Index_SVK()
+        {
+            library_globalContext db = new library_globalContext();
+            var num_info = (from a in db.ВыдачаКниг
+                            join b in db.Полка on a.IdПолки equals b.IdПолки
+                            join c in db.Читатели on a.IdЧитателя equals c.IdЧитателя
+                            join d in db.Клиенты on c.IdКлиента equals d.IdКлиента
+                            join e in db.Книги on b.IdКниги equals e.IdКниги
+                            join f in db.Штрафы on a.IdШтрафа equals f.IdШтрафа
+                            select new
+                            {
+                                Id_выдачи = a.IdВыдачи,
+                                Фамилия = d.Фамилия,
+                                Имя = d.Имя,
+                                Отчество = d.Отчество,
+                                наим_книги = e.НазваниеКниги,
+                                Дата_выдачи = a.ДатаВыдачи,
+                                одв = a.ОжидаемаяДатаВозврата,
+                                фдв = a.ФактическаяДатаВозврата,
+                                штраф = f.ШтрафнаяСумма
                             }).ToList();
             return Json(num_info, JsonRequestBehavior.AllowGet);
         }

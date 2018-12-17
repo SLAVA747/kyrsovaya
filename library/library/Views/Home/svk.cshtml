@@ -1,0 +1,33 @@
+﻿
+<html>
+<head>
+
+</head>
+<body>
+    <table id="jqg"></table>
+    <script type="text/javascript" charset="utf-8">
+        $("#jqg").jqGrid({
+            url: '/Home/Index_SVK',
+            datatype: "json",
+            colNames: ['Id выдачи', 'Фамилия', 'Имя', 'Отчество', 'Наим. книги', 'Дата выдачи', 'одв', 'фдв', 'штраф' ],
+            colModel: [
+                { name: 'Id_выдачи', index: 'Id', width: 50, stype: 'text' },
+                { name: 'Фамилия', index: 'Name', width: 100, sortable: true },
+                { name: 'Имя', index: 'Name', width: 100, sortable: true },
+                { name: 'Отчество', index: 'Name', width: 100, sortable: true },
+                { name: 'наим_книги', index: 'Name', width: 200, sortable: true },
+                { name: 'Дата_выдачи', index: 'Name', width: 150, sortable: true },
+                { name: 'одв', index: 'Name', width: 150, sortable: true },
+                { name: 'фдв', index: 'Name', width: 150, sortable: true },
+                { name: 'штраф', index: 'Name', width: 100, sortable: true }
+            ],
+            rowNum: 200, // число отображаемых строк
+            viewrecords: true, // show the current page, data rang and total records on the toolbar
+            loadonce: true, // загрузка только один раз
+            sortname: 'Id_выдачи', // сортировка по умолчанию по столбцу Id
+            sortorder: "desc", // порядок сортировки
+            caption: "Список выдачи"
+        });
+    </script>
+</body>
+</html>
