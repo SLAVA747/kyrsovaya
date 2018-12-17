@@ -1,0 +1,30 @@
+﻿
+<html>
+<head>
+
+</head>
+<body>
+    <table id="jqg"></table>
+    <script type="text/javascript" charset="utf-8">
+        $("#jqg").jqGrid({
+            url: '/Home/Index_readers',
+            datatype: "json",
+            colNames: ['Id читателя', 'Фамилия', 'Имя', 'Отчество', 'Вид контакта','Контактные данные', 'Адрес' ],
+            colModel: [
+                { name: 'Id_читателя', index: 'Id', width: 50, stype: 'text' },
+                { name: 'Фамилия', index: 'Name', width: 100, sortable: true },
+                { name: 'Имя', index: 'Name', width: 100, sortable: true },
+                { name: 'Отчество', index: 'Name', width: 100, sortable: true },
+                { name: 'Вид_контакта', index: 'Name', width: 100, sortable: true },
+                { name: 'контактные_данные', index: 'Name', width: 250, sortable: true },
+                { name: 'адрес', index: 'Name', width: 450, sortable: true }
+            ],
+            rowNum: 200, // число отображаемых строк
+            loadonce: true, // загрузка только один раз
+            sortname: 'Id_читателя', // сортировка по умолчанию по столбцу Id
+            sortorder: "desc", // порядок сортировки
+            caption: "Список читателей"
+        });
+    </script>
+</body>
+</html>
