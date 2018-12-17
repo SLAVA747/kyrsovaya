@@ -249,6 +249,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\library_globalContext.cs" />
+    <Compile Include="Models\ВыдачаКниг.cs" />
+    <Compile Include="Models\Жанры.cs" />
+    <Compile Include="Models\Книги.cs" />
+    <Compile Include="Models\СистемаШтрафов.cs" />
+    <Compile Include="Models\Читатели.cs" />
+    <Compile Include="Models\Штрафы.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -304,7 +311,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
