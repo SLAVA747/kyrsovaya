@@ -11,12 +11,12 @@ namespace library.Models
         }
 
         public int IdЧитателя { get; set; }
-        public string Фамилия { get; set; }
-        public string Имя { get; set; }
-        public string Отчество { get; set; }
-        public string Адрес { get; set; }
-        public string Телефон { get; set; }
+        public int? IdВидКонтакта { get; set; }
+        public string КонтактныеДанные { get; set; }
+        public int? IdКлиента { get; set; }
 
+        public virtual ВидыКонтактов IdВидКонтактаNavigation { get; set; }
+        public virtual Клиенты IdКлиентаNavigation { get; set; }
         public virtual ICollection<ВыдачаКниг> ВыдачаКниг { get; set; }
     }
 }

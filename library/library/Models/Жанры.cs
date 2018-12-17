@@ -7,12 +7,12 @@ namespace library.Models
     {
         public Жанры()
         {
-            Книги = new HashSet<Книги>();
+            Полка = new HashSet<Полка>();
         }
 
         public int IdЖанра { get; set; }
         public string НазваниеЖанра { get; set; }
 
-        public virtual ICollection<Книги> Книги { get; set; }
+        public virtual ICollection<Полка> Полка { get; set; }
     }
 }

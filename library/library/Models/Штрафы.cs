@@ -11,10 +11,9 @@ namespace library.Models
         }
 
         public int IdШтрафа { get; set; }
-        public int? IdВыдачи { get; set; }
-        public int? IdСистемыШтрафов { get; set; }
+        public string ОписаниеШтрафа { get; set; }
+        public decimal? ШтрафнаяСумма { get; set; }
 
-        public virtual СистемаШтрафов IdСистемыШтрафовNavigation { get; set; }
         public virtual ICollection<ВыдачаКниг> ВыдачаКниг { get; set; }
     }
 }

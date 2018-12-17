@@ -15,10 +15,13 @@ namespace library.Models
         {
         }
 
+        public virtual DbSet<Авторы> Авторы { get; set; }
+        public virtual DbSet<ВидыКонтактов> ВидыКонтактов { get; set; }
         public virtual DbSet<ВыдачаКниг> ВыдачаКниг { get; set; }
         public virtual DbSet<Жанры> Жанры { get; set; }
+        public virtual DbSet<Клиенты> Клиенты { get; set; }
         public virtual DbSet<Книги> Книги { get; set; }
-        public virtual DbSet<СистемаШтрафов> СистемаШтрафов { get; set; }
+        public virtual DbSet<Полка> Полка { get; set; }
         public virtual DbSet<Читатели> Читатели { get; set; }
         public virtual DbSet<Штрафы> Штрафы { get; set; }
 
@@ -35,6 +38,32 @@ namespace library.Models
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
 
+            modelBuilder.Entity<Авторы>(entity =>
+            {
+                entity.HasKey(e => e.IdАвтора)
+                    .HasName("авторы_pk");
+
+                entity.ToTable("авторы");
+
+                entity.Property(e => e.IdАвтора)
+                    .HasColumnName("id_автора")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Фио).HasColumnName("ФИО");
+            });
+
+            modelBuilder.Entity<ВидыКонтактов>(entity =>
+            {
+                entity.HasKey(e => e.IdВидКонтакта)
+                    .HasName("виды_контактов_pk");
+
+                entity.ToTable("виды_контактов");
+
+                entity.Property(e => e.IdВидКонтакта)
+                    .HasColumnName("id_вид_контакта")
+                    .ValueGeneratedNever();
+            });
+
             modelBuilder.Entity<ВыдачаКниг>(entity =>
             {
                 entity.HasKey(e => e.IdВыдачи)
@@ -46,7 +75,7 @@ namespace library.Models
                     .HasColumnName("id_выдачи")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.IdКниги).HasColumnName("id_книги");
+                entity.Property(e => e.IdПолки).HasColumnName("id_полки");
 
                 entity.Property(e => e.IdЧитателя).HasColumnName("id_читателя");
 
@@ -60,18 +89,14 @@ namespace library.Models
                     .HasColumnName("ожидаемая_дата_возврата")
                     .HasColumnType("date");
 
-                entity.Property(e => e.СуммаШтрафов)
-                    .HasColumnName("сумма_штрафов")
-                    .HasColumnType("money");
-
                 entity.Property(e => e.ФактическаяДатаВозврата)
                     .HasColumnName("фактическая_дата_возврата")
                     .HasColumnType("date");
 
-                entity.HasOne(d => d.IdКнигиNavigation)
+                entity.HasOne(d => d.IdПолкиNavigation)
                     .WithMany(p => p.ВыдачаКниг)
-                    .HasForeignKey(d => d.IdКниги)
-                    .HasConstraintName("выдача_книг_книги_fk");
+                    .HasForeignKey(d => d.IdПолки)
+                    .HasConstraintName("выдача_книг_полка_fk");
 
                 entity.HasOne(d => d.IdЧитателяNavigation)
                     .WithMany(p => p.ВыдачаКниг)
@@ -98,6 +123,26 @@ namespace library.Models
                 entity.Property(e => e.НазваниеЖанра).HasColumnName("название_жанра");
             });
 
+            modelBuilder.Entity<Клиенты>(entity =>
+            {
+                entity.HasKey(e => e.IdКлиента)
+                    .HasName("клиенты_pk");
+
+                entity.ToTable("клиенты");
+
+                entity.Property(e => e.IdКлиента)
+                    .HasColumnName("id_клиента")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Адрес).HasColumnName("адрес");
+
+                entity.Property(e => e.Имя).HasColumnName("имя");
+
+                entity.Property(e => e.Отчество).HasColumnName("отчество");
+
+                entity.Property(e => e.Фамилия).HasColumnName("фамилия");
+            });
+
             modelBuilder.Entity<Книги>(entity =>
             {
                 entity.HasKey(e => e.IdКниги)
@@ -109,32 +154,40 @@ namespace library.Models
                     .HasColumnName("id_книги")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.IdЖанра).HasColumnName("id_жанра");
-
                 entity.Property(e => e.НазваниеКниги).HasColumnName("Название_Книги");
-
-                entity.HasOne(d => d.IdЖанраNavigation)
-                    .WithMany(p => p.Книги)
-                    .HasForeignKey(d => d.IdЖанра)
-                    .HasConstraintName("книги_жанры_fk");
             });
 
-            modelBuilder.Entity<СистемаШтрафов>(entity =>
+            modelBuilder.Entity<Полка>(entity =>
             {
-                entity.HasKey(e => e.IdСистемыШтрафов)
-                    .HasName("система_штрафов_pk");
+                entity.HasKey(e => e.IdПолки)
+                    .HasName("полка_pk");
 
-                entity.ToTable("система_штрафов");
+                entity.ToTable("полка");
 
-                entity.Property(e => e.IdСистемыШтрафов)
-                    .HasColumnName("id_системы_штрафов")
+                entity.Property(e => e.IdПолки)
+                    .HasColumnName("id_полки")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.ОписаниеПовреждений).HasColumnName("описание_повреждений");
+                entity.Property(e => e.IdАвтора).HasColumnName("id_автора");
 
-                entity.Property(e => e.ШтрафнаяСумма)
-                    .HasColumnName("штрафная сумма")
-                    .HasColumnType("money");
+                entity.Property(e => e.IdЖанра).HasColumnName("id_жанра");
+
+                entity.Property(e => e.IdКниги).HasColumnName("id_книги");
+
+                entity.HasOne(d => d.IdАвтораNavigation)
+                    .WithMany(p => p.Полка)
+                    .HasForeignKey(d => d.IdАвтора)
+                    .HasConstraintName("полка_авторы_fk");
+
+                entity.HasOne(d => d.IdЖанраNavigation)
+                    .WithMany(p => p.Полка)
+                    .HasForeignKey(d => d.IdЖанра)
+                    .HasConstraintName("полка_жанры_fk");
+
+                entity.HasOne(d => d.IdКнигиNavigation)
+                    .WithMany(p => p.Полка)
+                    .HasForeignKey(d => d.IdКниги)
+                    .HasConstraintName("полка_книги_fk");
             });
 
             modelBuilder.Entity<Читатели>(entity =>
@@ -148,15 +201,21 @@ namespace library.Models
                     .HasColumnName("id_читателя")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.Адрес).HasColumnName("адрес");
+                entity.Property(e => e.IdВидКонтакта).HasColumnName("id_вид_контакта");
 
-                entity.Property(e => e.Имя).HasColumnName("имя");
+                entity.Property(e => e.IdКлиента).HasColumnName("id_клиента");
 
-                entity.Property(e => e.Отчество).HasColumnName("отчество");
+                entity.Property(e => e.КонтактныеДанные).HasColumnName("контактные_данные");
 
-                entity.Property(e => e.Телефон).HasColumnName("телефон");
+                entity.HasOne(d => d.IdВидКонтактаNavigation)
+                    .WithMany(p => p.Читатели)
+                    .HasForeignKey(d => d.IdВидКонтакта)
+                    .HasConstraintName("читатели_виды_контактов_fk");
 
-                entity.Property(e => e.Фамилия).HasColumnName("фамилия");
+                entity.HasOne(d => d.IdКлиентаNavigation)
+                    .WithMany(p => p.Читатели)
+                    .HasForeignKey(d => d.IdКлиента)
+                    .HasConstraintName("читатели_клиенты_fk");
             });
 
             modelBuilder.Entity<Штрафы>(entity =>
@@ -170,14 +229,11 @@ namespace library.Models
                     .HasColumnName("id_штрафа")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.IdВыдачи).HasColumnName("id_выдачи");
+                entity.Property(e => e.ОписаниеШтрафа).HasColumnName("описание_штрафа");
 
-                entity.Property(e => e.IdСистемыШтрафов).HasColumnName("id_системы_штрафов");
-
-                entity.HasOne(d => d.IdСистемыШтрафовNavigation)
-                    .WithMany(p => p.Штрафы)
-                    .HasForeignKey(d => d.IdСистемыШтрафов)
-                    .HasConstraintName("штрафы_система_штрафов_fk");
+                entity.Property(e => e.ШтрафнаяСумма)
+                    .HasColumnName("штрафная_сумма")
+                    .HasColumnType("money");
             });
         }
     }

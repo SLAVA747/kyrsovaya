@@ -250,9 +250,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\library_globalContext.cs" />
+    <Compile Include="Models\Авторы.cs" />
+    <Compile Include="Models\ВидыКонтактов.cs" />
     <Compile Include="Models\ВыдачаКниг.cs" />
     <Compile Include="Models\Жанры.cs" />
+    <Compile Include="Models\Клиенты.cs" />
     <Compile Include="Models\Книги.cs" />
+    <Compile Include="Models\Полка.cs" />
     <Compile Include="Models\СистемаШтрафов.cs" />
     <Compile Include="Models\Читатели.cs" />
     <Compile Include="Models\Штрафы.cs" />

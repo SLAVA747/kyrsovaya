@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace library.Models
 {
-    public partial class Книги
+    public partial class Авторы
     {
-        public Книги()
+        public Авторы()
         {
             Полка = new HashSet<Полка>();
         }
 
-        public int IdКниги { get; set; }
-        public string НазваниеКниги { get; set; }
+        public int IdАвтора { get; set; }
+        public string Фио { get; set; }
 
         public virtual ICollection<Полка> Полка { get; set; }
     }
