@@ -25,12 +25,16 @@ namespace library.Controllers
                              {
                                  bla1 = b.CompanyName
                              }).ToList();*/
-            var num_info = (from a in db.ВыдачаКниг
-                            join b in db.Читатели on a.IdЧитателя equals b.IdЧитателя
+            var num_info = (from a in db.Полка
+                            join b in db.Авторы on a.IdАвтора equals b.IdАвтора
+                            join c in db.Жанры on a.IdЖанра equals c.IdЖанра
+                            join d in db.Книги on a.IdКниги equals d.IdКниги
                             select new
                             {
-                                bla1 = b.IdВидКонтакта,
-                                bla2 = b.КонтактныеДанные
+                                Id_полки = a.IdПолки,
+                                Название_книги = d.НазваниеКниги,
+                                ФИО_Автора = b.Фио,
+                                Жанр = c.НазваниеЖанра
                             }).ToList();
             return Json(num_info, JsonRequestBehavior.AllowGet);
         }

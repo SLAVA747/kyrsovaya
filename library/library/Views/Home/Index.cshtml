@@ -1,63 +1,27 @@
-﻿    <html>
-    <head>
-        <script src="/Scripts/dhtmlxcommon.js" type="text/javascript" charset="utf-8"></script>
-        <script src="/Scripts/dhtmlxgrid.js" type="text/javascript" charset="utf-8"></script>
-        <script src="/Scripts/dhtmlxgridcell.js" type="text/javascript" charset="utf-8"></script>
+﻿
+<html>
+<head>
 
-        <script src="/Scripts/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
-        <script src="/Scripts/jquery.unobtrusive-ajax.js" type="text/javascript" charset="utf-8"></script>
-
-
-        <script src="/Scripts/ext/dhtmlxgrid_filter.js" type="text/javascript" charset="utf-8"></script>
-
-        <link rel="stylesheet" href="/Scripts/dhtmlxgrid.css" type="text/css" media="screen" charset="utf-8">
-        <link rel="stylesheet" href="/Scripts/skins/dhtmlxgrid_dhx_skyblue.css" type="text/css" media="screen" charset="utf-8">
-
-        <script src="/Scripts/dhtmlxdataprocessor.js" type="text/javascript" charset="utf-8"></script>
-    </head>
-    <body>
-        <div id="grid_here" style="width:600px; height:400px;">
-        </div>
-        <script type="text/javascript" charset="utf-8">
-            
-           // grid.parse("../home/index2/", "json");
-           // grid.parse("../home/index2/");
-            
-            //grid.parse(data, "json");
-            
-
-
-           
-            
-
-
-            var rootData;
-            
-            $(document).ready(function () {
-                $.ajax({
-                    type: 'GET',
-                    dataType: 'json',
-                    url: '/Home/Index2',
-                    success: function (data) {
-                        
-                        var itemRow = "<table>";  
-                        $(data).each(function (index, item) {
-                            itemRow += "<tr><td>" + item.bla1 +"         " + "</td><td>" + item.bla2 + "</td></tr>";
-
-                            $('#mylist').append("<li>"  + "</li>");
-                        });
-                        itemRow += "</table>";  
-                        $("#divItems").html(itemRow);
-
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert('Error - ' + errorThrown);
-                    }
-                });
-            });
-            
-
-        </script>
-        <div id="divItems"></div>
-    </body>
+</head>
+<body>
+    <table id="jqg"></table>
+    <script type="text/javascript" charset="utf-8">
+        $("#jqg").jqGrid({
+            url: '/Home/Index2',
+            datatype: "json",
+            colNames: ['Id полки', 'Название книги', 'ФИО Автора', 'Жанр'],
+            colModel: [
+                { name: 'Id_полки', index: 'Id', width: 150, stype: 'text' },
+                { name: 'Название_книги', index: 'Name', width: 150, sortable: true },
+                { name: 'ФИО_Автора', index: 'Name', width: 150, sortable: true },
+                { name: 'Жанр', index: 'Name', width: 250, sortable: true }
+            ],
+            rowNum: 200, // число отображаемых строк
+            loadonce: true, // загрузка только один раз
+            sortname: 'Id_полки', // сортировка по умолчанию по столбцу Id
+            sortorder: "desc", // порядок сортировки
+            caption: "Список Книг"
+        });
+    </script>
+</body>
 </html>
