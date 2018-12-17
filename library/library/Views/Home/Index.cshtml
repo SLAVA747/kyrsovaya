@@ -4,6 +4,10 @@
         <script src="/Scripts/dhtmlxgrid.js" type="text/javascript" charset="utf-8"></script>
         <script src="/Scripts/dhtmlxgridcell.js" type="text/javascript" charset="utf-8"></script>
 
+        <script src="/Scripts/jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/Scripts/jquery.unobtrusive-ajax.js" type="text/javascript" charset="utf-8"></script>
+
+
         <script src="/Scripts/ext/dhtmlxgrid_filter.js" type="text/javascript" charset="utf-8"></script>
 
         <link rel="stylesheet" href="/Scripts/dhtmlxgrid.css" type="text/css" media="screen" charset="utf-8">
@@ -15,37 +19,45 @@
         <div id="grid_here" style="width:600px; height:400px;">
         </div>
         <script type="text/javascript" charset="utf-8">
-		    var grid = new dhtmlXGridObject("grid_here");
-		    grid.setImagePath("/Scripts/imgs/");
-		    grid.setHeader("First name, Last name, Phone");
-		    grid.attachHeader("#text_filter,#text_filter,#text_filter");
-		    grid.setColumnIds("first_name,last_name,phone");
-		    grid.setColSorting("str,str,str");
-		    grid.setInitWidths("100,100,*");
-		    grid.setSkin("dhx_skyblue");
-		    grid.init();
+            
+           // grid.parse("../home/index2/", "json");
+           // grid.parse("../home/index2/");
+            
+            //grid.parse(data, "json");
+            
 
-		    grid.load("/Admin/Data?=" + grid.uid());//Add uid to prevent cache
 
-		    dp = new dataProcessor("/Admin/Save");
-		    dp.setTransactionMode("POST", false);
-		    dp.enableDataNames(true);
-		    dp.init(grid);
+           
+            
 
-		    function clear_filter() {
-		        grid.filterBy(0, "");
-		        grid._f_rowsBuffer = null;
-		    }
-		    function add() {
-		        clear_filter();
-		        grid.addRow(grid.uid(), 'new user');
-		    }
-		    function remove() {
-		        clear_filter();
-		        grid.deleteSelectedRows();
-		    }
+
+            var rootData;
+            
+            $(document).ready(function () {
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    url: '/Home/Index2',
+                    success: function (data) {
+                        
+                        var itemRow = "<table>";  
+                        $(data).each(function (index, item) {
+                            itemRow += "<tr><td>" + item.bla1 +"         " + "</td><td>" + item.bla2 + "</td></tr>";
+
+                            $('#mylist').append("<li>"  + "</li>");
+                        });
+                        itemRow += "</table>";  
+                        $("#divItems").html(itemRow);
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Error - ' + errorThrown);
+                    }
+                });
+            });
+            
+
         </script>
-        <input type="button" value="Add" onclick="add();">
-        <input type="button" value="Delete" onclick="remove();">
+        <div id="divItems"></div>
     </body>
 </html>

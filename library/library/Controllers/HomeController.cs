@@ -29,7 +29,8 @@ namespace library.Controllers
                             join b in db.Читатели on a.IdЧитателя equals b.IdЧитателя
                             select new
                             {
-                                bla1 = b.IdЧитателя
+                                bla1 = b.IdВидКонтакта,
+                                bla2 = b.КонтактныеДанные
                             }).ToList();
             return Json(num_info, JsonRequestBehavior.AllowGet);
         }
