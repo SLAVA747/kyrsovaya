@@ -312,3 +312,9 @@ C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\Microsoft.Exten
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\Microsoft.Net.Http.Headers.xml
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\System.Text.Encodings.Web.xml
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\Newtonsoft.Json.pdb
+C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\EntityFramework.dll
+C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\EntityFramework.SqlServer.dll
+C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\System.Web.Providers.dll
+C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\EntityFramework.xml
+C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\EntityFramework.SqlServer.xml
+C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\System.Web.Providers.xml

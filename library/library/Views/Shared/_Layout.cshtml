@@ -43,10 +43,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity.IsAuthenticated )
                     {
+                        if (User.IsInRole("Admin")) { 
                         <li>@Html.ActionLink("Читатели", "readers", "Home", new { area = "" }, null)</li>
                         <li>@Html.ActionLink("Список выданных книг", "SVK", "Home", new { area = "" }, null)</li>
+                        }
                         <li>@Html.ActionLink("Профиль", "profile", "Home", new { area = "" }, null)</li>
                         <li>@Html.ActionLink("Выход", "Logoff", "Account", new { area = "" }, null)</li>
 

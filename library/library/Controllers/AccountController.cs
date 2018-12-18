@@ -33,7 +33,7 @@ namespace library.Controllers
                     // создаем нового пользователя
                     using (usersContext db = new usersContext())
                     {
-                        db.Users.Add(new Users { Login = model.Name, Password = model.Password });
+                        db.Users.Add(new Users { Login = model.Name, Password = model.Password, IdRole = 2  });
                         db.SaveChanges();
 
                         user = db.Users.Where(u => u.Login == model.Name && u.Password == model.Password).FirstOrDefault();

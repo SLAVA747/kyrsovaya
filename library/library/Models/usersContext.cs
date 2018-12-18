@@ -15,6 +15,7 @@ namespace library.Models
         {
         }
 
+        public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -30,6 +31,20 @@ namespace library.Models
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
 
+            modelBuilder.Entity<Role>(entity =>
+            {
+                entity.HasKey(e => e.IdRole)
+                    .HasName("role_pk");
+
+                entity.ToTable("role");
+
+                entity.Property(e => e.IdRole)
+                    .HasColumnName("id_role")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Name).HasColumnName("name");
+            });
+
             modelBuilder.Entity<Users>(entity =>
             {
                 entity.ToTable("users");
@@ -38,11 +53,16 @@ namespace library.Models
                     .HasColumnName("id")
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.IdRole).HasColumnName("id_role");
+
                 entity.Property(e => e.Login).HasColumnName("login");
 
                 entity.Property(e => e.Password).HasColumnName("password");
 
-                entity.Property(e => e.Roles).HasColumnName("roles");
+                entity.HasOne(d => d.IdRoleNavigation)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.IdRole)
+                    .HasConstraintName("users_role_fk");
             });
         }
     }
