@@ -5,23 +5,39 @@
 </head>
 <body>
     <table id="jqg"></table>
+    <div id="jpager"></div>
     <script type="text/javascript" charset="utf-8">
         $("#jqg").jqGrid({
             url: '/Home/Index_library',
             datatype: "json",
             colNames: ['Id полки', 'Название книги', 'ФИО Автора', 'Жанр'],
             colModel: [
-                { name: 'Id_полки', index: 'Id', width: 150, stype: 'text' },
-                { name: 'Название_книги', index: 'Name', width: 150, sortable: true },
-                { name: 'ФИО_Автора', index: 'Name', width: 150, sortable: true },
-                { name: 'Жанр', index: 'Name', width: 250, sortable: true }
+                { name: 'Id_полки', index: 'Id_полки', width: 150, sortable: true, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                { name: 'Название_книги', index: 'Название_книги', width: 150, sortable: true, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                { name: 'ФИО_Автора', index: 'ФИО_Автора', width: 150, sortable: true, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
+                { name: 'Жанр', index: 'Жанр', width: 250, sortable: true, searchoptions: { sopt: ['eq', 'ne', 'cn'] } }
             ],
-            rowNum: 200, // число отображаемых строк
+            rowNum: 10, // число отображаемых строк
+            pager: '#jpager',
             loadonce: true, // загрузка только один раз
             sortname: 'Id_полки', // сортировка по умолчанию по столбцу Id
             sortorder: "desc", // порядок сортировки
             caption: "Список Книг"
+            
+           
+
+
         });
+        $("#jqg").jqGrid('navGrid', '#jpager', {
+            add: false,
+            del: false,
+            edit: false,
+            search: true,
+            searchtext: "Поиск",
+            refresh: true,
+            refreshtext: "Обновить"
+        });
+        
     </script>
 </body>
 </html>

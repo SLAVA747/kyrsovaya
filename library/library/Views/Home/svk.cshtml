@@ -5,28 +5,38 @@
 </head>
 <body>
     <table id="jqg"></table>
+    <div id="jpager"></div>
     <script type="text/javascript" charset="utf-8">
         $("#jqg").jqGrid({
             url: '/Home/Index_SVK',
             datatype: "json",
-            colNames: ['Id выдачи', 'Фамилия', 'Имя', 'Отчество', 'Наим. книги', 'Дата выдачи', 'одв', 'фдв', 'штраф' ],
+            colNames: ['Id выдачи', 'Фамилия', 'Имя', 'Отчество', 'Наим. книги', 'Дата выдачи', 'одв', 'фдв', 'штраф'],
             colModel: [
-                { name: 'Id_выдачи', index: 'Id', width: 50, stype: 'text' },
-                { name: 'Фамилия', index: 'Name', width: 100, sortable: true },
-                { name: 'Имя', index: 'Name', width: 100, sortable: true },
-                { name: 'Отчество', index: 'Name', width: 100, sortable: true },
-                { name: 'наим_книги', index: 'Name', width: 200, sortable: true },
-                { name: 'Дата_выдачи', index: 'Name', width: 150, sortable: true },
-                { name: 'одв', index: 'Name', width: 150, sortable: true },
-                { name: 'фдв', index: 'Name', width: 150, sortable: true },
-                { name: 'штраф', index: 'Name', width: 100, sortable: true }
+                { name: 'Id_выдачи', index: 'Id_выдачи', width: 50, stype: 'text', sortable: true },
+                { name: 'Фамилия', index: 'Фамилия', width: 100, sortable: true },
+                { name: 'Имя', index: 'Имя', width: 100, sortable: true },
+                { name: 'Отчество', index: 'Отчество', width: 100, sortable: true },
+                { name: 'наим_книги', index: 'наим_книги', width: 200, sortable: true },
+                { name: 'Дата_выдачи', index: 'Дата_выдачи', width: 150, sortable: true },
+                { name: 'одв', index: 'одв', width: 150, sortable: true },
+                { name: 'фдв', index: 'фдв', width: 150, sortable: true },
+                { name: 'штраф', index: 'штраф', width: 100, sortable: true }
             ],
-            rowNum: 200, // число отображаемых строк
-            viewrecords: true, // show the current page, data rang and total records on the toolbar
+            rowNum: 10, // число отображаемых строк
+            pager: '#jpager',
             loadonce: true, // загрузка только один раз
             sortname: 'Id_выдачи', // сортировка по умолчанию по столбцу Id
             sortorder: "desc", // порядок сортировки
             caption: "Список выдачи"
+        });
+        $("#jqg").jqGrid('navGrid', '#jpager', {
+            add: false,
+            del: false,
+            edit: false,
+            search: true,
+            searchtext: "Поиск",
+            refresh: true,
+            refreshtext: "Обновить"
         });
     </script>
 </body>

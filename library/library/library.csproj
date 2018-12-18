@@ -453,6 +453,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="bg\bg.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -491,6 +492,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\лупа.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -515,6 +517,13 @@
     <Content Include="grid.json" />
     <Content Include="Grid.mvc.readme" />
     <Content Include="Content\MvcGrid\Fonts\GridGlyphs.woff" />
+    <Content Include="Scripts\Changes.txt" />
+    <Content Include="Scripts\i18n\grid.locale-ca.js" />
+    <Content Include="Scripts\i18n\grid.locale-me.js" />
+    <Content Include="Scripts\i18n\grid.locale-sq.js" />
+    <Content Include="Scripts\i18n\grid.locale-uk.js" />
+    <Content Include="Scripts\install.txt" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\calendar\calendar.css" />
     <Content Include="Scripts\calendar\calendar.js" />
@@ -751,6 +760,10 @@
     <Content Include="Scripts\jqGrid\jquery.jqDatePicker.min.js" />
     <Content Include="Scripts\jqGrid\jquery.jqGrid.js" />
     <Content Include="Scripts\jqGrid\jquery.jqGrid.min.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.11.0.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -761,11 +774,20 @@
     <Content Include="Scripts\jquery.jqGrid.src.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\MvcGrid\mvc-grid.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\skins\dhtmlxgrid_dhx_black.css" />
     <Content Include="Scripts\skins\dhtmlxgrid_dhx_blue.css" />
     <Content Include="Scripts\skins\dhtmlxgrid_dhx_skyblue.css" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

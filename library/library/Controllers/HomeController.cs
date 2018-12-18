@@ -9,6 +9,7 @@ namespace library.Controllers
 {
     public class HomeController : Controller
     {
+        library_globalContext db = new library_globalContext();
         public ActionResult Index()
         {
 
@@ -27,10 +28,13 @@ namespace library.Controllers
 
             return View();
         }
+
+        
+
         [HttpGet]
         public JsonResult Index_library()
         {
-            library_globalContext db = new library_globalContext();
+ 
             var num_info = (from a in db.Полка
                             join b in db.Авторы on a.IdАвтора equals b.IdАвтора
                             join c in db.Жанры on a.IdЖанра equals c.IdЖанра
@@ -47,7 +51,6 @@ namespace library.Controllers
         [HttpGet]
         public JsonResult Index_readers()
         {
-            library_globalContext db = new library_globalContext();
             var num_info = (from a in db.Читатели
                             join b in db.Клиенты on a.IdКлиента equals b.IdКлиента
                             join c in db.ВидыКонтактов on a.IdВидКонтакта equals c.IdВидКонтакта
@@ -66,7 +69,6 @@ namespace library.Controllers
         [HttpGet]
         public JsonResult Index_SVK()
         {
-            library_globalContext db = new library_globalContext();
             var num_info = (from a in db.ВыдачаКниг
                             join b in db.Полка on a.IdПолки equals b.IdПолки
                             join c in db.Читатели on a.IdЧитателя equals c.IdЧитателя
