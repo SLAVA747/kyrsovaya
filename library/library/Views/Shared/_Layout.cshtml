@@ -37,12 +37,28 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Библиотека", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                
+                    @Html.ActionLink("Библиотека", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Читатели", "readers", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Список выданных книг", "SVK", "Home", new { area = "" }, null)</li>
+                    @if (User.Identity.IsAuthenticated )
+                    {
+                        if (User.IsInRole("Admin")) { 
+                        <li>@Html.ActionLink("Читатели", "readers", "Home", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Список выданных книг", "SVK", "Home", new { area = "" }, null)</li>
+                        }
+                        <li>@Html.ActionLink("Профиль", "profile", "Home", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Выход", "Logoff", "Account", new { area = "" }, null)</li>
+
+                    }
+                    else
+                    {
+                         <li>@Html.ActionLink("Регистрация", "Register", "Account", new { area = "" }, null)</li>
+                         <li>@Html.ActionLink("Авторизация", "login", "Account", new { area = "" }, null)</li>
+
+                    }
                 </ul>
             </div>
         </div>
