@@ -439,6 +439,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\library_globalContext.cs" />
+    <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\usersContext.cs" />
     <Compile Include="Models\Авторы.cs" />
     <Compile Include="Models\ВидыКонтактов.cs" />
     <Compile Include="Models\ВыдачаКниг.cs" />
