@@ -9,6 +9,16 @@ namespace library.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
+        public ActionResult edit_books()
+        {
+            return View();
+        }
+        [Authorize]
+        public ActionResult profile()
+        {
+            return View();
+        }
         library_globalContext db = new library_globalContext();
         public ActionResult Index()
         {

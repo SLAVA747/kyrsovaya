@@ -41,6 +41,8 @@ namespace library.Models
                 entity.Property(e => e.Login).HasColumnName("login");
 
                 entity.Property(e => e.Password).HasColumnName("password");
+
+                entity.Property(e => e.Roles).HasColumnName("roles");
             });
         }
     }

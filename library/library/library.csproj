@@ -433,11 +433,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Models.cs" />
     <Compile Include="Models\library_globalContext.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Models\usersContext.cs" />
@@ -790,7 +792,9 @@
     <Content Include="Scripts\skins\dhtmlxgrid_dhx_blue.css" />
     <Content Include="Scripts\skins\dhtmlxgrid_dhx_skyblue.css" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -811,6 +815,9 @@
     <Content Include="Views\Shared\MvcGrid\_Grid.cshtml" />
     <Content Include="Views\Home\readers.cshtml" />
     <Content Include="Views\Home\svk.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
