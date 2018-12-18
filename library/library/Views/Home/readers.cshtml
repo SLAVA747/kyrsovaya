@@ -1,0 +1,41 @@
+﻿
+<html>
+<head>
+
+</head>
+<body>
+    <table id="jqg"></table>
+    <div id="jpager"></div>
+    <script type="text/javascript" charset="utf-8">
+        $("#jqg").jqGrid({
+            url: '/Home/Index_readers',
+            datatype: "json",
+            colNames: ['Id читателя', 'Фамилия', 'Имя', 'Отчество', 'Вид контакта', 'Контактные данные', 'Адрес'],
+            colModel: [
+                { name: 'Id_читателя', index: 'Id_читателя', width: 50, stype: 'text', sortable: true  },
+                { name: 'Фамилия', index: 'Фамилия', width: 100, sortable: true },
+                { name: 'Имя', index: 'Имя', width: 100, sortable: true },
+                { name: 'Отчество', index: 'Отчество', width: 100, sortable: true },
+                { name: 'Вид_контакта', index: 'Вид_контакта', width: 100, sortable: true },
+                { name: 'контактные_данные', index: 'контактные_данные', width: 250, sortable: true },
+                { name: 'адрес', index: 'адрес', width: 450, sortable: true }
+            ],
+            rowNum: 10, // число отображаемых строк
+            pager: '#jpager',
+            loadonce: true, // загрузка только один раз
+            sortname: 'Id_читателя', // сортировка по умолчанию по столбцу Id
+            sortorder: "desc", // порядок сортировки
+            caption: "Список читателей"
+        });
+        $("#jqg").jqGrid('navGrid', '#jpager', {
+            add: false,
+            del: false,
+            edit: false,
+            search: true,
+            searchtext: "Поиск",
+            refresh: true,
+            refreshtext: "Обновить"
+        });
+    </script>
+</body>
+</html>
