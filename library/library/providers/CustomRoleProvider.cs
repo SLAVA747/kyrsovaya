@@ -40,9 +40,9 @@ namespace library.providers
         {
             string[] roles = new string[] { };
 
-            using (usersContext db = new usersContext())
+            using (library_globalContext db = new library_globalContext())
             {
-                Users user = db.Users.FirstOrDefault(u => u.Login == username);
+                Клиенты user = db.Клиенты.FirstOrDefault(u => u.Login == username);
                 if (user != null)
                 {
                     Role userRole = db.Role.Find(user.IdRole);
@@ -63,9 +63,9 @@ namespace library.providers
         {
             bool outputResult = false;
 
-            using (usersContext db = new usersContext())
+            using (library_globalContext db = new library_globalContext())
             {
-                Users user = db.Users.FirstOrDefault(u => u.Login == username);
+                Клиенты user = db.Клиенты.FirstOrDefault(u => u.Login == username);
                 if (user != null)
                 {
                     Role userRole = db.Role.Find(user.IdRole);

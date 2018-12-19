@@ -23,21 +23,21 @@ namespace library.Controllers
         {
             if (ModelState.IsValid)
             {
-                Users user = null;
-                using (usersContext db = new usersContext())
+                Клиенты user = null;
+                using (library_globalContext db = new library_globalContext())
                 {
-                    user = db.Users.FirstOrDefault(u => u.Login == model.Name);
+                    user = db.Клиенты.FirstOrDefault(u => u.Login == model.Name);
                 }
                 if (user == null)
                 {
                     // создаем нового пользователя
-                    using (usersContext db = new usersContext())
+                    using (library_globalContext db = new library_globalContext())
                     {
-                        int lastid = db.Users.Max(u => u.Id);
-                        db.Users.Add(new Users { Id= lastid+1, Login = model.Name, Password = model.Password, IdRole = 2  });
+                        int lastid = db.Клиенты.Max(u => u.IdКлиента);
+                        db.Клиенты.Add(new Клиенты { IdКлиента= lastid+1, Login = model.Name, Password = model.Password, IdRole = 2  });
                         db.SaveChanges();
 
-                        user = db.Users.Where(u => u.Login == model.Name && u.Password == model.Password).FirstOrDefault();
+                        user = db.Клиенты.Where(u => u.Login == model.Name && u.Password == model.Password).FirstOrDefault();
                     }
                     // если пользователь удачно добавлен в бд
                     if (user != null)
@@ -71,10 +71,10 @@ namespace library.Controllers
             if (ModelState.IsValid)
             {
                 // поиск пользователя в бд
-                Users user = null;
-                using (usersContext db = new usersContext())
+                Клиенты user = null;
+                using (library_globalContext db = new library_globalContext())
                 {
-                    user = db.Users.FirstOrDefault(u => u.Login == model.Name && u.Password == model.Password);
+                    user = db.Клиенты.FirstOrDefault(u => u.Login == model.Name && u.Password == model.Password);
 
                 }
                 if (user != null)

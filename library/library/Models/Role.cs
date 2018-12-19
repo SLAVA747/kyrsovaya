@@ -7,12 +7,12 @@ namespace library.Models
     {
         public Role()
         {
-            Users = new HashSet<Users>();
+            Клиенты = new HashSet<Клиенты>();
         }
 
         public int IdRole { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Users> Users { get; set; }
+        public virtual ICollection<Клиенты> Клиенты { get; set; }
     }
 }
