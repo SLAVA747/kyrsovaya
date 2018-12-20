@@ -1,0 +1,121 @@
+﻿@model library.Models.Клиенты
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>profile</title>
+</head>
+<body>
+    <div class="main_form">
+        <h4>Клиенты</h4>
+        <hr />
+
+        <dl>
+            <dt>
+                @Html.DisplayName("ID пользователя:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IdКлиента)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Аватар:")
+            </dt>
+
+            <dd>
+                <img src="~/img/avatars/@Html.DisplayFor(model => model.avatar)" width="100" height="100" />
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Фамилия:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Фамилия)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Имя:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Имя)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Отчество:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Отчество)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Адрес:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Адрес)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Логин:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Login)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Рейтинг:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Rate)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Возраст:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Age)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Кол-во комментариев:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Возвращено книг:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BooksBack)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Прочитано книг:")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BooksReads)
+            </dd>
+
+        </dl>
+        <input type="button" value="Редактировать профиль" onclick="location.href='@Url.Action("edit_profile", "account")'" />
+    </div>
+
+</body>
+</html>

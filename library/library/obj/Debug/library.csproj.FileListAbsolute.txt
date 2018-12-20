@@ -318,3 +318,5 @@ C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\System.Web.Prov
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\EntityFramework.xml
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\EntityFramework.SqlServer.xml
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\System.Web.Providers.xml
+C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\Microsoft.AspNet.Identity.Core.xml
