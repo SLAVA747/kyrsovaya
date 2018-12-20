@@ -9,7 +9,7 @@ using System.Web.Security;
 using System.Data.Entity.Migrations;
 
 using library.Models;
-
+using System.IO;
 
 namespace library.Controllers
 {
@@ -34,7 +34,8 @@ namespace library.Controllers
             model.Comments = user.Comments;
             model.IdКлиента = user.IdКлиента;
             model.Login = user.Login;
-            
+            model.avatar = user.avatar;
+
 
             return View(model);
         }
@@ -53,12 +54,15 @@ namespace library.Controllers
             model.Age = user.Age;
             model.Адрес = user.Адрес;
             model.Password = user.Password;
+            model.avatar = user.avatar;
 
             return View(model);
         }
         [HttpPost]
         public ActionResult edit_profile(Клиенты userprofile)
         {
+            
+            
             if (ModelState.IsValid)
             {
                 library_globalContext db = new library_globalContext();
@@ -67,12 +71,20 @@ namespace library.Controllers
                 Клиенты user = db.Клиенты.FirstOrDefault(u => u.Login.Equals(username));
 
                 // Update fields
+                string filename = Path.GetFileNameWithoutExtension(userprofile.ImageFile.FileName);
+                string extension = Path.GetExtension(userprofile.ImageFile.FileName);
                 user.Имя = userprofile.Имя;
                 user.Фамилия = userprofile.Фамилия;
                 user.Отчество = userprofile.Отчество;
                 user.Age = userprofile.Age;
                 user.Адрес = userprofile.Адрес;
                 user.Password = userprofile.Password;
+                filename = filename + DateTime.Now.ToString("ttmmssfff") + extension;
+                userprofile.avatar = "~/img/avatars/" + filename;
+                user.avatar = filename;
+                filename = Path.Combine(Server.MapPath("~/img/avatars"), filename);
+                userprofile.ImageFile.SaveAs(filename);
+                
                 db.Клиенты.Update(user); //requires using System.Data.Entity.Migrations;
                 db.SaveChanges();
                 

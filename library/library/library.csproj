@@ -451,6 +451,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\image.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\library_globalContext.cs" />
     <Compile Include="Models\ProfileModel.cs" />
@@ -509,6 +510,26 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\books\1.jpg" />
+    <Content Include="img\books\10.jpg" />
+    <Content Include="img\books\11.jpg" />
+    <Content Include="img\books\12.jpg" />
+    <Content Include="img\books\13.jpg" />
+    <Content Include="img\books\14.jpg" />
+    <Content Include="img\books\15.jpg" />
+    <Content Include="img\books\16.jpg" />
+    <Content Include="img\books\17.jpg" />
+    <Content Include="img\books\18.jpg" />
+    <Content Include="img\books\19.jpg" />
+    <Content Include="img\books\2.jpg" />
+    <Content Include="img\books\20.jpg" />
+    <Content Include="img\books\3.jpg" />
+    <Content Include="img\books\4.jpg" />
+    <Content Include="img\books\5.jpg" />
+    <Content Include="img\books\6.jpg" />
+    <Content Include="img\books\7.jpg" />
+    <Content Include="img\books\8.jpg" />
+    <Content Include="img\books\9.jpg" />
     <Content Include="img\лупа.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -835,6 +856,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="img\avatars\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
