@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace library.Models
 {
@@ -16,6 +17,7 @@ namespace library.Models
         public string Отчество { get; set; }
         public string Адрес { get; set; }
         public string Login { get; set; }
+        [Required]
         public string Password { get; set; }
         public int? IdRole { get; set; }
         public int? Rate { get; set; }

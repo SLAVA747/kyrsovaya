@@ -19,3 +19,14 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.main_form {
+    background: rgba(255,255,255,0.5);
+   
+}
+.profile_text_style {
+    color: black;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 18px;
+
+}

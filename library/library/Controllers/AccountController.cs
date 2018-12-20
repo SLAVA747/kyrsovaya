@@ -1,16 +1,88 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Profile;
 using System.Web.Security;
+using System.Data.Entity.Migrations;
+
 using library.Models;
+
 
 namespace library.Controllers
 {
     public class AccountController : Controller
     {
-        
+        public ActionResult profile()
+        {
+            string username = User.Identity.Name;
+            library_globalContext db = new library_globalContext();
+            // Fetch the userprofile
+            Клиенты user = db.Клиенты.FirstOrDefault(u => u.Login.Equals(username));
+
+            // Construct the viewmodel
+            Клиенты model = new Клиенты();
+            model.Фамилия = user.Фамилия;
+            model.Имя = user.Имя;
+            model.Отчество = user.Отчество;
+            model.Age = user.Age;
+            model.Адрес = user.Адрес;
+            model.BooksBack = user.BooksBack;
+            model.BooksReads = user.BooksReads;
+            model.Comments = user.Comments;
+            model.IdКлиента = user.IdКлиента;
+            model.Login = user.Login;
+            
+
+            return View(model);
+        }
+        public ActionResult edit_profile()
+        {
+            string username = User.Identity.Name;
+            library_globalContext db = new library_globalContext();
+            // Fetch the userprofile
+            Клиенты user = db.Клиенты.FirstOrDefault(u => u.Login.Equals(username));
+
+            // Construct the viewmodel
+            Клиенты model = new Клиенты();
+            model.Фамилия = user.Фамилия;
+            model.Имя = user.Имя;
+            model.Отчество = user.Отчество;
+            model.Age = user.Age;
+            model.Адрес = user.Адрес;
+            model.Password = user.Password;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult edit_profile(Клиенты userprofile)
+        {
+            if (ModelState.IsValid)
+            {
+                library_globalContext db = new library_globalContext();
+                string username = User.Identity.Name;
+                // Get the userprofile
+                Клиенты user = db.Клиенты.FirstOrDefault(u => u.Login.Equals(username));
+
+                // Update fields
+                user.Имя = userprofile.Имя;
+                user.Фамилия = userprofile.Фамилия;
+                user.Отчество = userprofile.Отчество;
+                user.Age = userprofile.Age;
+                user.Адрес = userprofile.Адрес;
+                user.Password = userprofile.Password;
+                db.Клиенты.Update(user); //requires using System.Data.Entity.Migrations;
+                db.SaveChanges();
+                
+
+                return RedirectToAction("profile", "account"); // or whatever
+            }
+
+            return View(userprofile);
+        }
+
         public ActionResult Register()
         {
             return View();
@@ -91,7 +163,7 @@ namespace library.Controllers
             return View(model);
         }
 
-
+        
 
     }
 }
