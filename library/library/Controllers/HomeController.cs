@@ -10,20 +10,38 @@ namespace library.Controllers
 {
     public class HomeController : Controller
     {
-        
-        
         library_globalContext db = new library_globalContext();
+
+        public ActionResult add_books()
+        {
+
+
+            return View();
+        }
+
+
+
+
+
+
+
+
+
         [HttpGet]
         public JsonResult Index_books()
         {
 
             var books_info = (from a in db.Книги
-                             orderby a.IdКниги descending
+                              join b in db.Авторы on a.IdАвтора equals b.IdАвтора
+                              orderby a.IdКниги descending
                              select new
                              {
                                  Название = a.НазваниеКниги,
                                  Img = a.ImgSrc,
-                                 описание = a.Описание
+                                 описание = a.Описание,
+                                 автор = b.Фио,
+                                 Дата = a.ДатаДобавления,
+                                 Рейтинг = a.Рейтинг
 
                              }).ToList().Take(9);
             return Json(books_info, JsonRequestBehavior.AllowGet);

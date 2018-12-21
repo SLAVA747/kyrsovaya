@@ -58,13 +58,13 @@
         <tr>
             <td id="id_table_book_avtor1">Ячейка 2</td>
             <td id="id_table_book_date1">Ячейка 2</td>
-            <td id="id_table_book_arenda1">Ячейка 3</td>
+            <td id="id_table_book_rate1">Ячейка 3</td>
             <td id="id_table_book_avtor2">Ячейка 2</td>
             <td id="id_table_book_date2">Ячейка 2</td>
-            <td id="id_table_book_arenda2">Ячейка 3</td>
+            <td id="id_table_book_rate2">Ячейка 3</td>
             <td id="id_table_book_avtor3">Ячейка 2</td>
             <td id="id_table_book_date3">Ячейка 2</td>
-            <td id="id_table_book_arenda3">Ячейка 3</td>
+            <td id="id_table_book_rate3">Ячейка 3</td>
         </tr>
         <!--Ячейка2-->
         <tr>
@@ -83,13 +83,13 @@
         <tr>
             <td id="id_table_book_avtor4">Ячейка 2</td>
             <td id="id_table_book_date4">Ячейка 2</td>
-            <td id="id_table_book_arenda4">Ячейка 3</td>
+            <td id="id_table_book_rate4">Ячейка 3</td>
             <td id="id_table_book_avtor5">Ячейка 2</td>
             <td id="id_table_book_date5">Ячейка 2</td>
-            <td id="id_table_book_arenda5">Ячейка 3</td>
+            <td id="id_table_book_rate5">Ячейка 3</td>
             <td id="id_table_book_avtor6">Ячейка 2</td>
             <td id="id_table_book_date6">Ячейка 2</td>
-            <td id="id_table_book_arenda6">Ячейка 3</td>
+            <td id="id_table_book_rate6">Ячейка 3</td>
         </tr>
         <!--Ячейка3-->
         <tr>
@@ -108,17 +108,17 @@
         <tr>
             <td id="id_table_book_avtor7">Ячейка 2</td>
             <td id="id_table_book_date7">Ячейка 2</td>
-            <td id="id_table_book_arenda7">Ячейка 3</td>
+            <td id="id_table_book_rate7">Ячейка 3</td>
             <td id="id_table_book_avtor8">Ячейка 2</td>
             <td id="id_table_book_date8">Ячейка 2</td>
-            <td id="id_table_book_arenda8">Ячейка 3</td>
+            <td id="id_table_book_rate8">Ячейка 3</td>
             <td id="id_table_book_avtor9">Ячейка 2</td>
             <td id="id_table_book_date9">Ячейка 2</td>
-            <td id="id_table_book_arenda9">Ячейка 3</td>
+            <td id="id_table_book_rate9">Ячейка 3</td>
         </tr>
         <!--Ячейка_смена-->
         <tr>
-            <td colspan="9" id="id_table_book_list" align="center">Ячейка 1</td>
+            <td colspan="9" id="id_table_book_list" align="center">1..n</td>
         </tr>
 
     </table>
@@ -133,27 +133,35 @@
                 $.each(data, function (i, item) {
                     b++;
                    
-                    addTable3(item.Название, item.Img, b, item.описание);
+                    addTable3(item.Название, item.Img, b, item.описание, item.автор, item.Дата, item.Рейтинг);
                     
                 });
             },
         });
-        function addTable3(a, b, c, d) {
+        function addTable3(a, b, c, d, e, f, j) {
             var convert = c.toString();
             var test1 = "id_table_book_title" + convert;
             var test2 = "id_table_book_img" + convert;
             var test3 = "id_table_book_description" + convert;
+            var test4 = "id_table_book_avtor" + convert;
+            var test5 = "id_table_book_date" + convert;
+            var test6 = "id_table_book_rate" + convert;
 
             var td = document.getElementById(test1);
             var td2 = document.getElementById(test2);
             var td3 = document.getElementById(test3);
+            var td4 = document.getElementById(test4);
+            var td5 = document.getElementById(test5);
+            var td6 = document.getElementById(test6);
+            td4.innerHTML = "Автор:" + e;
             td3.innerHTML = d.substring(0, 100) + "...";
             td.innerHTML = a.substring(0, 30);
             var img = document.createElement("img");
             img.src = '/img/books/' + b;
             img.width = 100;
             img.height = 150;
-
+            td5.innerHTML = "Дата добавления:";
+            td6.innerHTML = "Рейтинг:" + j+ "/10";
             td2.appendChild(img);
             
 
