@@ -39,14 +39,125 @@
          });
 
      </script>-->
+    
     <table border="1" id="table_main">
+        <!--Ячейка1-->
         <tr>
-            <td class="col1">Колонка 1</td>
-            <td class="col2">Колонка 2</td>
-            <td class="col1">Колонка 1</td>
+            <td colspan="3" id="id_table_book_title1" align="center">Ячейка 1</td>
+            <td colspan="3" id="id_table_book_title2" align="center">Ячейка 1 </td>
+            <td colspan="3" id="id_table_book_title3" align="center">Ячейка 1</td>
+        </tr>
+        <tr>
+            <td colspan="2" id="id_table_book_img1" align="center"></td>
+            <td id="id_table_book_description1" valign="top">asaasg</td>
+            <td colspan="2" id="id_table_book_img2" align="center"></td>
+            <td id="id_table_book_description2" valign="top">asaasg</td>
+            <td colspan="2" id="id_table_book_img3" align="center"></td>
+            <td id="id_table_book_description3" valign="top">asaasg</td>
+        </tr>
+        <tr>
+            <td id="id_table_book_avtor1">Ячейка 2</td>
+            <td id="id_table_book_date1">Ячейка 2</td>
+            <td id="id_table_book_arenda1">Ячейка 3</td>
+            <td id="id_table_book_avtor2">Ячейка 2</td>
+            <td id="id_table_book_date2">Ячейка 2</td>
+            <td id="id_table_book_arenda2">Ячейка 3</td>
+            <td id="id_table_book_avtor3">Ячейка 2</td>
+            <td id="id_table_book_date3">Ячейка 2</td>
+            <td id="id_table_book_arenda3">Ячейка 3</td>
+        </tr>
+        <!--Ячейка2-->
+        <tr>
+            <td colspan="3" id="id_table_book_title4" align="center">Ячейка 1</td>
+            <td colspan="3" id="id_table_book_title5" align="center">Ячейка 1</td>
+            <td colspan="3" id="id_table_book_title6" align="center">Ячейка 1</td>
+        </tr>
+        <tr>
+            <td colspan="2" id="id_table_book_img4" align="center"></td>
+            <td id="id_table_book_description4" valign="top">1</td>
+            <td colspan="2" id="id_table_book_img5" align="center"></td>
+            <td id="id_table_book_description5" valign="top">1</td>
+            <td colspan="2" id="id_table_book_img6" align="center"></td>
+            <td id="id_table_book_description6" valign="top">2</td>
+        </tr>
+        <tr>
+            <td id="id_table_book_avtor4">Ячейка 2</td>
+            <td id="id_table_book_date4">Ячейка 2</td>
+            <td id="id_table_book_arenda4">Ячейка 3</td>
+            <td id="id_table_book_avtor5">Ячейка 2</td>
+            <td id="id_table_book_date5">Ячейка 2</td>
+            <td id="id_table_book_arenda5">Ячейка 3</td>
+            <td id="id_table_book_avtor6">Ячейка 2</td>
+            <td id="id_table_book_date6">Ячейка 2</td>
+            <td id="id_table_book_arenda6">Ячейка 3</td>
+        </tr>
+        <!--Ячейка3-->
+        <tr>
+            <td colspan="3" id="id_table_book_title7" align="center">Ячейка 1</td>
+            <td colspan="3" id="id_table_book_title8" align="center">Ячейка 1</td>
+            <td colspan="3" id="id_table_book_title9" align="center">Ячейка 1</td>
+        </tr>
+        <tr>
+            <td colspan="2" id="id_table_book_img7" align="center"></td>
+            <td id="id_table_book_description7" valign="top">1</td>
+            <td colspan="2" id="id_table_book_img8" align="center"></td>
+            <td id="id_table_book_description8" valign="top">2</td>
+            <td colspan="2" id="id_table_book_img9" align="center"></td>
+            <td id="id_table_book_description9" valign="top">3</td>
+        </tr>
+        <tr>
+            <td id="id_table_book_avtor7">Ячейка 2</td>
+            <td id="id_table_book_date7">Ячейка 2</td>
+            <td id="id_table_book_arenda7">Ячейка 3</td>
+            <td id="id_table_book_avtor8">Ячейка 2</td>
+            <td id="id_table_book_date8">Ячейка 2</td>
+            <td id="id_table_book_arenda8">Ячейка 3</td>
+            <td id="id_table_book_avtor9">Ячейка 2</td>
+            <td id="id_table_book_date9">Ячейка 2</td>
+            <td id="id_table_book_arenda9">Ячейка 3</td>
+        </tr>
+        <!--Ячейка_смена-->
+        <tr>
+            <td colspan="9" id="id_table_book_list" align="center">Ячейка 1</td>
+        </tr>
+
+    </table>
+    <script>
+        // Комментарии
+        $.ajax({
+            url: "/home/Index_books/",
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                var b=0;
+                $.each(data, function (i, item) {
+                    b++;
+                   
+                    addTable3(item.Название, item.Img, b, item.описание);
+                    
+                });
+            },
+        });
+        function addTable3(a, b, c, d) {
+            var convert = c.toString();
+            var test1 = "id_table_book_title" + convert;
+            var test2 = "id_table_book_img" + convert;
+            var test3 = "id_table_book_description" + convert;
+
+            var td = document.getElementById(test1);
+            var td2 = document.getElementById(test2);
+            var td3 = document.getElementById(test3);
+            td3.innerHTML = d.substring(0, 100) + "...";
+            td.innerHTML = a.substring(0, 30);
+            var img = document.createElement("img");
+            img.src = '/img/books/' + b;
+            img.width = 100;
+            img.height = 150;
+
+            td2.appendChild(img);
             
 
-        </tr>
-    </table>
+        };
+    </script>
 </body>
 </html>

@@ -70,7 +70,7 @@
             <script>
                 // Комментарии
                 $.ajax({
-                    url: "home/index_rate/",
+                    url: "/home/index_rate/",
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {
@@ -103,7 +103,7 @@
                                 td.appendChild(document.createTextNode(a));
                             } else if (i == 1 && j == 0) {
                                 var img = document.createElement("img");
-                                img.src = 'img/avatars/' + c;
+                                img.src = '/img/avatars/' + c;
                                 img.width = 50;
                                 img.height = 50;
 
@@ -130,7 +130,7 @@
                 <script>
                     // Комментарии
                     $.ajax({
-                        url: "home/index_comments/",
+                        url: "/home/index_comments/",
                         type: 'GET',
                         dataType: 'json',
                         success: function (data) {
@@ -163,7 +163,7 @@
                                     td.appendChild(document.createTextNode(a));
                                 } else if (i == 1 && j == 0) {
                                     var img = document.createElement("img");
-                                    img.src = 'img/avatars/' + c;
+                                    img.src = '/img/avatars/' + c;
                                     img.width = 50;
                                     img.height = 50;
 

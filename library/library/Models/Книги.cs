@@ -13,6 +13,7 @@ namespace library.Models
         public int IdКниги { get; set; }
         public string НазваниеКниги { get; set; }
         public string ImgSrc { get; set; }
+        public string Описание { get; set; }
         public DateTime? ДатаДобавления { get; set; }
         public int? Рейтинг { get; set; }
         public int? IdАвтора { get; set; }

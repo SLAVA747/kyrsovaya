@@ -13,6 +13,22 @@ namespace library.Controllers
         
         
         library_globalContext db = new library_globalContext();
+        [HttpGet]
+        public JsonResult Index_books()
+        {
+
+            var books_info = (from a in db.Книги
+                             orderby a.IdКниги descending
+                             select new
+                             {
+                                 Название = a.НазваниеКниги,
+                                 Img = a.ImgSrc,
+                                 описание = a.Описание
+
+                             }).ToList().Take(9);
+            return Json(books_info, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Index()
         {
 
