@@ -10,9 +10,43 @@ namespace library.Controllers
 {
     public class HomeController : Controller
     {
-        
-        
         library_globalContext db = new library_globalContext();
+
+        public ActionResult add_books()
+        {
+
+
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+        [HttpGet]
+        public JsonResult Index_books()
+        {
+
+            var books_info = (from a in db.Книги
+                              join b in db.Авторы on a.IdАвтора equals b.IdАвтора
+                              orderby a.IdКниги descending
+                             select new
+                             {
+                                 Название = a.НазваниеКниги,
+                                 Img = a.ImgSrc,
+                                 описание = a.Описание,
+                                 автор = b.Фио,
+                                 Дата = a.ДатаДобавления,
+                                 Рейтинг = a.Рейтинг
+
+                             }).ToList().Take(9);
+            return Json(books_info, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Index()
         {
 
@@ -32,7 +66,39 @@ namespace library.Controllers
             return View();
         }
 
-        
+
+        [HttpGet]
+        public JsonResult Index_rate()
+        {
+
+            var rate_info = (from a in db.Клиенты
+                            orderby a.Rate descending
+                            select new
+                            {
+                                Фамилия = a.Фамилия,
+                                Рейтинг = a.Rate,
+                                Аватар = a.Avatar
+                            }).ToList().Take(10);
+            return Json(rate_info, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
+        public JsonResult Index_comments()
+        {
+
+            var com_info = (from a in db.Комментарии1
+                            join b in db.Клиенты on a.IdКлиента equals b.IdКлиента
+                            orderby a.IdКомментария descending
+                            select new
+                            {
+                                Фамилия = b.Фамилия,
+                                id_юзера = b.IdКлиента,
+                                Комментарий = a.Text,
+                                Аватар = b.Avatar
+                            }).ToList().Take(10);
+            return Json(com_info, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpGet]
         public JsonResult Index_library()

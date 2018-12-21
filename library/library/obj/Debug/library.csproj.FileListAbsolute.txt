@@ -238,7 +238,6 @@ C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\ru\System.Web.R
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\ru\System.Web.WebPages.resources.dll
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\ru\System.Web.WebPages.Deployment.resources.dll
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\ru\System.Web.WebPages.Razor.resources.dll
-C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\obj\Debug\library.csprojAssemblyReference.cache
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\obj\Debug\library.dll.config
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\obj\Debug\library.csproj.CoreCompileInputs.cache
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\obj\Debug\library.csproj.CopyComplete
@@ -320,3 +319,4 @@ C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\EntityFramework
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\System.Web.Providers.xml
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\SLAVA747\Documents\GitHub\kyrsovaya\library\library\obj\Debug\library.csprojAssemblyReference.cache

@@ -462,6 +462,7 @@
     <Compile Include="Models\Жанры.cs" />
     <Compile Include="Models\Клиенты.cs" />
     <Compile Include="Models\Книги.cs" />
+    <Compile Include="Models\Комментарии1.cs" />
     <Compile Include="Models\Полка.cs" />
     <Compile Include="Models\СистемаШтрафов.cs" />
     <Compile Include="Models\Читатели.cs" />
@@ -853,6 +854,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Edit_Profile.cshtml" />
     <Content Include="Views\Account\profile.cshtml" />
+    <Content Include="Views\Home\add_books.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

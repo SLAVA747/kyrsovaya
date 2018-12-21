@@ -34,7 +34,7 @@ namespace library.Controllers
             model.Comments = user.Comments;
             model.IdКлиента = user.IdКлиента;
             model.Login = user.Login;
-            model.avatar = user.avatar;
+            model.Avatar = user.Avatar;
 
 
             return View(model);
@@ -54,7 +54,7 @@ namespace library.Controllers
             model.Age = user.Age;
             model.Адрес = user.Адрес;
             model.Password = user.Password;
-            model.avatar = user.avatar;
+            model.Avatar = user.Avatar;
 
             return View(model);
         }
@@ -80,8 +80,8 @@ namespace library.Controllers
                 user.Адрес = userprofile.Адрес;
                 user.Password = userprofile.Password;
                 filename = filename + DateTime.Now.ToString("ttmmssfff") + extension;
-                userprofile.avatar = "~/img/avatars/" + filename;
-                user.avatar = filename;
+                userprofile.Avatar = "~/img/avatars/" + filename;
+                user.Avatar = filename;
                 filename = Path.Combine(Server.MapPath("~/img/avatars"), filename);
                 userprofile.ImageFile.SaveAs(filename);
                 
