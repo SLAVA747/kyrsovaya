@@ -33,6 +33,21 @@ namespace library.Controllers
         }
 
 
+        [HttpGet]
+        public JsonResult Index_rate()
+        {
+
+            var rate_info = (from a in db.Клиенты
+                            orderby a.Rate descending
+                            select new
+                            {
+                                Фамилия = a.Фамилия,
+                                Рейтинг = a.Rate,
+                                Аватар = a.Avatar
+                            }).ToList().Take(10);
+            return Json(rate_info, JsonRequestBehavior.AllowGet);
+        }
+
 
         [HttpGet]
         public JsonResult Index_comments()
@@ -40,6 +55,7 @@ namespace library.Controllers
 
             var com_info = (from a in db.Комментарии1
                             join b in db.Клиенты on a.IdКлиента equals b.IdКлиента
+                            orderby a.IdКомментария descending
                             select new
                             {
                                 Фамилия = b.Фамилия,
