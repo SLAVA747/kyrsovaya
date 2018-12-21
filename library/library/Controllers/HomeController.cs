@@ -32,7 +32,23 @@ namespace library.Controllers
             return View();
         }
 
-        
+
+
+        [HttpGet]
+        public JsonResult Index_comments()
+        {
+
+            var com_info = (from a in db.Комментарии1
+                            join b in db.Клиенты on a.IdКлиента equals b.IdКлиента
+                            select new
+                            {
+                                Фамилия = b.Фамилия,
+                                id_юзера = b.IdКлиента,
+                                Комментарий = a.Text,
+                                Аватар = b.Avatar
+                            }).ToList().Take(10);
+            return Json(com_info, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpGet]
         public JsonResult Index_library()

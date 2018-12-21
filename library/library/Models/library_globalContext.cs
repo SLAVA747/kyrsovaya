@@ -22,9 +22,12 @@ namespace library.Models
         public virtual DbSet<Жанры> Жанры { get; set; }
         public virtual DbSet<Клиенты> Клиенты { get; set; }
         public virtual DbSet<Книги> Книги { get; set; }
+        public virtual DbSet<Комментарии1> Комментарии1 { get; set; }
         public virtual DbSet<Полка> Полка { get; set; }
         public virtual DbSet<Читатели> Читатели { get; set; }
         public virtual DbSet<Штрафы> Штрафы { get; set; }
+
+        // Unable to generate entity type for table 'public.Комментарии'. Please see the warning messages.
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -151,6 +154,8 @@ namespace library.Models
 
                 entity.Property(e => e.Age).HasColumnName("age");
 
+                entity.Property(e => e.Avatar).HasColumnName("avatar");
+
                 entity.Property(e => e.BooksBack).HasColumnName("books_back");
 
                 entity.Property(e => e.BooksReads).HasColumnName("books_reads");
@@ -190,7 +195,38 @@ namespace library.Models
                     .HasColumnName("id_книги")
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.IdАвтора).HasColumnName("id_автора");
+
+                entity.Property(e => e.ImgSrc).HasColumnName("img_src");
+
+                entity.Property(e => e.ДатаДобавления)
+                    .HasColumnName("Дата_добавления")
+                    .HasColumnType("date");
+
                 entity.Property(e => e.НазваниеКниги).HasColumnName("Название_Книги");
+            });
+
+            modelBuilder.Entity<Комментарии1>(entity =>
+            {
+                entity.HasKey(e => e.IdКомментария)
+                    .HasName("комментарии_pk");
+
+                entity.ToTable("комментарии");
+
+                entity.Property(e => e.IdКомментария)
+                    .HasColumnName("id_комментария")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.IdКлиента).HasColumnName("id_клиента");
+
+                entity.Property(e => e.IdКниги).HasColumnName("id_книги");
+
+                entity.Property(e => e.Text).HasColumnName("text");
+
+                entity.HasOne(d => d.IdКлиентаNavigation)
+                    .WithMany(p => p.Комментарии1)
+                    .HasForeignKey(d => d.IdКлиента)
+                    .HasConstraintName("комментарии_клиенты_fk");
             });
 
             modelBuilder.Entity<Полка>(entity =>

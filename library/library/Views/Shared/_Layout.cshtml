@@ -29,49 +29,116 @@
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
+    <div>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
                     @Html.ActionLink("Библиотека", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                }
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if (User.Identity.IsAuthenticated )
-                    {
-                        if (User.IsInRole("Admin")) { 
-                        <li>@Html.ActionLink("Читатели", "readers", "Home", new { area = "" }, null)</li>
-                        <li>@Html.ActionLink("Список выданных книг", "SVK", "Home", new { area = "" }, null)</li>
+
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li>@Html.ActionLink("Читатели", "readers", "Home", new { area = "" }, null)</li>
+                                <li>@Html.ActionLink("Список выданных книг", "SVK", "Home", new { area = "" }, null)</li>
+                            }
+                            <li>@Html.ActionLink("Профиль", "profile", "account", new { area = "" }, null)</li>
+                            <li>@Html.ActionLink("Выход", "Logoff", "Account", new { area = "" }, null)</li>
+
                         }
-                        <li>@Html.ActionLink("Профиль", "profile", "account", new { area = "" }, null)</li>
-                        <li>@Html.ActionLink("Выход", "Logoff", "Account", new { area = "" }, null)</li>
+                        else
+                        {
+                            <li>@Html.ActionLink("Регистрация", "Register", "Account", new { area = "" }, null)</li>
+                            <li>@Html.ActionLink("Авторизация", "login", "Account", new { area = "" }, null)</li>
 
-                    }   
-                    else
-                    {
-                         <li>@Html.ActionLink("Регистрация", "Register", "Account", new { area = "" }, null)</li>
-                         <li>@Html.ActionLink("Авторизация", "login", "Account", new { area = "" }, null)</li>
-
-                    }
-                </ul>
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
-        </footer>
-    </div>
+        <div class="main_form">
+            <div id="content"><div id="menu">Рейтинг пользователей:<hr /></div>@RenderBody()</div>
+            <div id="comments">Последние комментарии:<hr /><br />
+             
+            <script>
+                 $.ajax({
+                     url: "home/index_comments/",
+                     type: 'GET',
+                     dataType: 'json',
+                     success: function (data) {
+                         $.each(data, function (i, item) {
+                            
+                             addTable(item.Фамилия, item.Комментарий, item.Аватар);
+                             
+                         });   
+                     },
+                 });
 
-  
-    @RenderSection("scripts", required: false)
+                function addTable(a,b,c) {
+                    var myTableDiv = document.getElementById("comments");
+
+                    var table = document.createElement('TABLE');
+                    table.border = '1';
+                    
+                    var tableBody = document.createElement('TBODY');
+                    table.appendChild(tableBody);
+
+                    for (var i = 0; i < 3; i++) {
+                        var tr = document.createElement('TR');
+                        
+                        tableBody.appendChild(tr);
+                        
+                        for (var j = 0; j < 1; j++) {
+                            var td = document.createElement('TD');
+                            td.width = '75';
+                            if (i == 0 && j == 0) {
+                                td.appendChild(document.createTextNode(a));
+                            } else if (i == 1 && j == 0) {
+                                var img = document.createElement("img");
+                                img.src = 'img/avatars/' + c;
+                                img.width = 50;
+                                img.height = 50;
+                                td.appendChild(img);
+                            } else if (i == 2 && j == 0) {
+                                td.appendChild(document.createTextNode(b));
+                            }
+                            
+                            td.setAttribute('rowSpan', '2');
+                            tr.appendChild(td);
+                        }
+                        
+                    }
+                    
+                    myTableDiv.appendChild(table);
+                    document.getElementById("comments").innerHTML += "<br >";
+                }
+             </script>
+            
+            
+            
+            
+            </div>
+            <div id="bottom">
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
+                </footer>
+            </div>
+        </div>
+        
+        <div>
+            @RenderSection("scripts", required: false)
+        </div>
+
+    </div>    
 </body>
 </html>

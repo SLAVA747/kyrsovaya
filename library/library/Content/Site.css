@@ -5,6 +5,7 @@
     background-color: #cccccc;
     background-repeat: no-repeat;
     background-size: cover;
+
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -22,11 +23,43 @@ textarea {
 
 .main_form {
     background: rgba(255,255,255,0.5);
-   
+    height: 100%
 }
 .profile_text_style {
     color: black;
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-size: 18px;
+
+}
+#menu { /* Левый блок*/
+    width: 200px;
+    float: left;
+    color: white;
+    background: #008080;
+    padding: 10px;
+    height: 100%;
+    
+}
+
+#content { /* центральный блок*/
+    display: inline-block;
+    height: 100%;
+ 
+}
+#comments { /* Правый блок*/
+    width: 200px;
+    float: right;
+    padding: 10px;
+    background: #fff;
+    height: 100%;
+}
+
+#bottom {
+    clear: both; 
+    padding: 10px;
+    background: #444;
+    color: #fff;
+    margin-right: auto;
+    margin-left: auto;
 
 }

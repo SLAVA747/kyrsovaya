@@ -12,6 +12,7 @@ namespace library.Models
 
         public int IdАвтора { get; set; }
         public string Фио { get; set; }
+        public string Описание { get; set; }
 
         public virtual ICollection<Полка> Полка { get; set; }
     }
