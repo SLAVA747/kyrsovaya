@@ -1,4 +1,9 @@
-﻿
+﻿@{
+
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+
 <html>
 <head>
 
@@ -39,7 +44,7 @@
          });
 
      </script>-->
-    
+
     <table border="1" id="table_main">
         <!--Ячейка1-->
         <tr>
@@ -125,15 +130,16 @@
     <script>
         ba = 0;
         total = 0;
-        // Комментарии
+        let type = new URLSearchParams(document.location.search.substring(1));
         $.ajax({
-            url: "/home/Index_books/",
+            url: "/home/Index_book_json?" + type,
             type: 'GET',
             dataType: 'json',
             success: function (data) {
                 
                 $.each(data, function (i, item) {
                     ba++;
+                    
                     if (ba < 10) {
                         total = (data.length + 1) / 9;
                         addTable3(item.Название, item.Img, ba, item.описание, item.автор, item.Дата, item.Рейтинг, total);
@@ -149,7 +155,7 @@
             var test4 = "id_table_book_avtor" + convert;
             var test5 = "id_table_book_date" + convert;
             var test6 = "id_table_book_rate" + convert;
-
+            var 
             var td = document.getElementById(test1);
             var td2 = document.getElementById(test2);
             var td3 = document.getElementById(test3);
@@ -164,17 +170,17 @@
             img.width = 100;
             img.height = 150;
             td5.innerHTML = "Дата добавления:";
-            td6.innerHTML = "Рейтинг:" + j+ "/10";
+            td6.innerHTML = "Рейтинг:" + j + "/10";
             td2.appendChild(img);
             var convert = b.toString();
             td7 = document.getElementById("id_table_book_list");
             if (k => 2) {
-                td7.innerHTML = "<a href='Home/Index_next?i=1'>2</a> ... <a href='Home/Index_next?i=" + Math.ceil(k-1)+"'>"+Math.ceil(k)+"</a>";
-            } else if (k == 1) {
-            td7.innerHTML = Math.ceil(k);
+                td7.innerHTML = "<a href=Index_next?i=1'>2</a> ... <a href='Index_next?i=" + Math.ceil(k) + "'>" + Math.ceil(k) + "</a>";
+            } else  {
+                td7.innerHTML = Math.ceil(k);
             }
         };
-        
+
     </script>
 </body>
 </html>

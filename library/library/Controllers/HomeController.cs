@@ -18,9 +18,79 @@ namespace library.Controllers
 
             return View();
         }
+        
+        public ActionResult search()
+        {
 
 
+            return View();
+        }
+        public ActionResult search_result()
+        {
 
+
+            return View();
+        }
+        public JsonResult search_json_result(int type,string text)
+        {
+            object search_info = null;
+            var text2 = text;
+            text = text.ToLower();
+            text = text.Substring(0, 1).ToUpper() + text.Remove(0, 1);
+            text2 = text2.ToLower();
+
+            if (type == 1) {
+                search_info = (from a in db.Книги
+                               join b in db.Авторы on a.IdАвтора equals b.IdАвтора
+                               orderby a.IdКниги descending
+                               where a.НазваниеКниги.Contains(text2) || a.НазваниеКниги.Contains(text)
+                               select new
+                                  {
+                                      Название = a.НазваниеКниги,
+                                      Img = a.ImgSrc,
+                                      описание = a.Описание,
+                                      автор = b.Фио,
+                                      Дата = a.ДатаДобавления,
+                                      Рейтинг = a.Рейтинг
+
+                                  }).ToList();
+            } else if(type == 2)
+            {
+               search_info = (from a in db.Книги
+                                  join b in db.Авторы on a.IdАвтора equals b.IdАвтора
+                                  orderby a.IdКниги descending
+                                  where b.Фио.Contains(text)
+                                  select new
+                                  {
+                                      Название = a.НазваниеКниги,
+                                      Img = a.ImgSrc,
+                                      описание = a.Описание,
+                                      автор = b.Фио,
+                                      Дата = a.ДатаДобавления,
+                                      Рейтинг = a.Рейтинг
+
+                                  }).ToList();
+            } else if(type == 3)
+            {
+                search_info = (from a in db.Книги
+                                  join b in db.Авторы on a.IdАвтора equals b.IdАвтора
+                                  orderby a.IdКниги descending
+                                  where b.Фио.Contains(text)
+                                  select new
+                                  {
+                                      Название = a.НазваниеКниги,
+                                      Img = a.ImgSrc,
+                                      описание = a.Описание,
+                                      автор = b.Фио,
+                                      Дата = a.ДатаДобавления,
+                                      Рейтинг = a.Рейтинг
+
+                                  }).ToList();
+            }
+
+            
+            return Json(search_info, JsonRequestBehavior.AllowGet);
+        }
 
 
 
@@ -34,7 +104,7 @@ namespace library.Controllers
             var books_info = (from a in db.Книги
                               join b in db.Авторы on a.IdАвтора equals b.IdАвтора
                               orderby a.IdКниги descending
-                             select new
+                              select new
                              {
                                  Название = a.НазваниеКниги,
                                  Img = a.ImgSrc,
@@ -43,7 +113,7 @@ namespace library.Controllers
                                  Дата = a.ДатаДобавления,
                                  Рейтинг = a.Рейтинг
 
-                             }).ToList().Take(9);
+                             }).ToList();
             return Json(books_info, JsonRequestBehavior.AllowGet);
         }
 
@@ -52,6 +122,34 @@ namespace library.Controllers
 
 
             return View();
+        }
+        public ActionResult Index_next()
+        {
+
+
+            return View();
+        }
+        [HttpGet]
+        public JsonResult Index_book_json(int i)
+        {
+            int count_books = db.Книги.Count();
+            var books_json = (from a in db.Книги
+                              join b in db.Авторы on a.IdАвтора equals b.IdАвтора
+                              where a.IdКниги <= count_books -(i * 9)
+                              orderby a.IdКниги descending
+
+                              select new
+                              {
+                                  Название = a.НазваниеКниги,
+                                  Img = a.ImgSrc,
+                                  описание = a.Описание,
+                                  автор = b.Фио,
+                                  Дата = a.ДатаДобавления,
+                                  Рейтинг = a.Рейтинг
+
+                              }).ToList();
+
+            return Json(books_json, JsonRequestBehavior.AllowGet);
         }
         public ActionResult readers()
         {

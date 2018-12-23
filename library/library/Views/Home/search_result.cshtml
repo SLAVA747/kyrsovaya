@@ -4,42 +4,19 @@
 
 </head>
 <body>
-    <!-- <table id="jqg"></table>
-     <div id="jpager"></div>
-     <script type="text/javascript" charset="utf-8">
-         $("#jqg").jqGrid({
-             url: '/Home/Index_library',
-             datatype: "json",
-             colNames: ['Id полки', 'Название книги', 'ФИО Автора', 'Жанр'],
-             colModel: [
-                 { name: 'Id_полки', index: 'Id_полки', width: 150, sortable: true, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                 { name: 'Название_книги', index: 'Название_книги', width: 150, sortable: true, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                 { name: 'ФИО_Автора', index: 'ФИО_Автора', width: 150, sortable: true, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                 { name: 'Жанр', index: 'Жанр', width: 250, sortable: true, searchoptions: { sopt: ['eq', 'ne', 'cn'] } }
-             ],
-             rowNum: 10, // число отображаемых строк
-             pager: '#jpager',
-             loadonce: true, // загрузка только один раз
-             sortname: 'Id_полки', // сортировка по умолчанию по столбцу Id
-             sortorder: "desc", // порядок сортировки
-             caption: "Список Книг"
+    <div>
+        <form action="search_result">
+            <h1>Поиск:</h1>
 
-
-
-
-         });
-         $("#jqg").jqGrid('navGrid', '#jpager', {
-             add: false,
-             del: false,
-             edit: false,
-             search: true,
-             searchtext: "Поиск",
-             refresh: true,
-             refreshtext: "Обновить"
-         });
-
-     </script>-->
-    
+            <select name='type'>
+                <option selected value="1">Книги</option>
+                <option value="2">Автор</option>
+                <option value="3">Жанр</option>
+            </select>
+            <input type="text" name="text" />
+            <input type="submit" value="Поиск" id="Seachbtn">
+        </form>
+    </div>
     <table border="1" id="table_main">
         <!--Ячейка1-->
         <tr>
@@ -118,62 +95,67 @@
         </tr>
         <!--Ячейка_смена-->
         <tr>
-            <td colspan="9" id="id_table_book_list" align="center">1..n</td>
+            <td colspan="9" id="id_table_book_list" align="center"></td>
         </tr>
 
     </table>
     <script>
         ba = 0;
         total = 0;
-        // Комментарии
-        $.ajax({
-            url: "/home/Index_books/",
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                
-                $.each(data, function (i, item) {
-                    ba++;
-                    if (ba < 10) {
-                        total = (data.length + 1) / 9;
-                        addTable3(item.Название, item.Img, ba, item.описание, item.автор, item.Дата, item.Рейтинг, total);
-                    }
-                });
-            },
-        });
-        function addTable3(a, b, c, d, e, f, j, k) {
-            var convert = c.toString();
-            var test1 = "id_table_book_title" + convert;
-            var test2 = "id_table_book_img" + convert;
-            var test3 = "id_table_book_description" + convert;
-            var test4 = "id_table_book_avtor" + convert;
-            var test5 = "id_table_book_date" + convert;
-            var test6 = "id_table_book_rate" + convert;
+        $(document).ready(function () {
+            let type = new URLSearchParams(document.location.search.substring(1));
+            // Комментарии
+            $.ajax({
+                type: 'post',
+                url: "/home/search_json_result?" + type,
+                dataType: 'json',
+                success: function (data) {
+                    
+                    $.each(data, function (i, item) {
+                        ba++;
 
-            var td = document.getElementById(test1);
-            var td2 = document.getElementById(test2);
-            var td3 = document.getElementById(test3);
-            var td4 = document.getElementById(test4);
-            var td5 = document.getElementById(test5);
-            var td6 = document.getElementById(test6);
-            td4.innerHTML = "Автор:" + e;
-            td3.innerHTML = d.substring(0, 100) + "...";
-            td.innerHTML = a.substring(0, 30);
-            var img = document.createElement("img");
-            img.src = '/img/books/' + b;
-            img.width = 100;
-            img.height = 150;
-            td5.innerHTML = "Дата добавления:";
-            td6.innerHTML = "Рейтинг:" + j+ "/10";
-            td2.appendChild(img);
-            var convert = b.toString();
-            td7 = document.getElementById("id_table_book_list");
-            if (k => 2) {
-                td7.innerHTML = "<a href='Home/Index_next?i=1'>2</a> ... <a href='Home/Index_next?i=" + Math.ceil(k-1)+"'>"+Math.ceil(k)+"</a>";
-            } else if (k == 1) {
-            td7.innerHTML = Math.ceil(k);
-            }
-        };
+                        if (ba < 10) {
+                            total = (data.length + 1) / 9;
+                            addTable3(item.Название, item.Img, ba, item.описание, item.автор, item.Дата, item.Рейтинг, total);
+                        }
+                    });
+                },
+            });
+            function addTable3(a, b, c, d, e, f, j, k) {
+                var convert = c.toString();
+                var test1 = "id_table_book_title" + convert;
+                var test2 = "id_table_book_img" + convert;
+                var test3 = "id_table_book_description" + convert;
+                var test4 = "id_table_book_avtor" + convert;
+                var test5 = "id_table_book_date" + convert;
+                var test6 = "id_table_book_rate" + convert;
+
+                var td = document.getElementById(test1);
+                var td2 = document.getElementById(test2);
+                var td3 = document.getElementById(test3);
+                var td4 = document.getElementById(test4);
+                var td5 = document.getElementById(test5);
+                var td6 = document.getElementById(test6);
+                td4.innerHTML = "Автор:" + e;
+                td3.innerHTML = d.substring(0, 100) + "...";
+                td.innerHTML = a.substring(0, 30);
+                var img = document.createElement("img");
+                img.src = '/img/books/' + b;
+                img.width = 100;
+                img.height = 150;
+                td5.innerHTML = "Дата добавления:";
+                td6.innerHTML = "Рейтинг:" + j + "/10";
+                td2.appendChild(img);
+                var convert = b.toString();
+                td7 = document.getElementById("id_table_book_list");
+                if (k > 2) {
+                    td7.innerHTML = "Index_book_json?i='>2</a> " + " ... " + Math.ceil(k);
+                } else if (k == 2) {
+                    td7.innerHTML = Math.ceil(k);
+                }
+
+            };
+        });
         
     </script>
 </body>

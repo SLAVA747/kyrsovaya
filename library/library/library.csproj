@@ -855,6 +855,9 @@
     <Content Include="Views\Account\Edit_Profile.cshtml" />
     <Content Include="Views\Account\profile.cshtml" />
     <Content Include="Views\Home\add_books.cshtml" />
+    <Content Include="Views\Home\search.cshtml" />
+    <Content Include="Views\Home\search_result.cshtml" />
+    <Content Include="Views\Home\Index_next.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
