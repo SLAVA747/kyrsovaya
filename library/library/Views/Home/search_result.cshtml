@@ -102,40 +102,38 @@
 
     </table>
     <script>
-        ba = 0;
-        total = 0;
+        let type = new URLSearchParams(document.location.search.substring(1));
         $(document).ready(function () {
-            let type = new URLSearchParams(document.location.search.substring(1));
-            let i_page = parseInt(type.get("page"));
-            // Комментарии
+            ba = 0;
+            total = 0;
             $.ajax({
                 type: 'post',
                 url: "/home/search_json_result?" + type,
                 dataType: 'json',
                 success: function (data) {
-                    var test = i_page;
-                    $.each(data, function (i, item) {     
-                        
-                            addTable3(item.Название, item.Img, ba, item.описание, item.автор, item.Дата, item.Рейтинг, total);
-                        }
-                    });
-                    $.ajax({
-                        url: "/home/total_book_json",
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (data) {
-                            addbottomlist(data.length / 9);
-                        },
-                    });
-
-
-                    });
+      
+                    $.each(data, function (i, item) {
+                        ba++;
+                        addTable3(item.Название, item.Img, ba, item.описание, item.автор, item.Дата, item.Рейтинг, total);
+                    })
+                }
+            })
+            $.ajax({
+                url: "/home/Search_json_result_total?" + type,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
                     addbottomlist(data.length / 9);
-                },
-            });
-            function addTable3(a, b, c, d, e, f, j, k) {
+
+                }
+            })
+        
+           
+        function addTable3(a, b, c, d, e, f, j, k) {
                 let type = new URLSearchParams(document.location.search.substring(1));
                 let i_page = parseInt(type.get("page"));
+                let i_text = type.get("text");
+                let i_type = parseInt(type.get("type"));
                 var convert = c.toString();
                 var test1 = "id_table_book_title" + convert;
                 var test2 = "id_table_book_img" + convert;
@@ -163,25 +161,26 @@
                 var convert = b.toString();
 
                 td7 = document.getElementById("id_table_book_list");
-                if (i_page == 0) {
-                    td7.innerHTML = "1 " + "<a href='Index_next?i=" + (i_page + 1) + "'>" + (i_page + 2) + "</a>";
+            if (i_page == 0) {
+                td7.innerHTML = "1 " + "<a href='search_result?type=" + i_type+"&text=" + i_text + "&page=" + (i_page + 2) + "'>" + "</a>";
                 } else if (i_page == 1) {
-                    td7.innerHTML = "<a href='Index_next?i=" + (i_page - 1) + "'>" + (i_page) + "</a> " + (i_page + 1);
+                td7.innerHTML = "<a href='search_result?type=" + i_type + "&text=" + i_text + "&page=" + (i_page-1) + "'>" + (i_page) + "</a> " + (i_page + 1);
                 } else if (i_page > 1) {
-                    td7.innerHTML = "<a href='Index_next?i=0'>1</a> " + "<a href='Index_next?i=" + (i_page - 1) + "'>" + (i_page) + "</a> " + (i_page + 1);
+                td7.innerHTML = "<a href='search_result?type=" + i_type + "&text=" + i_text + "&page=" + (i_page + 1) + "'>" + (i_page) + "</a> " + (i_page + 1);
                 }
             };
 
             function addbottomlist(a) {
-                let type = new URLSearchParams(document.location.search.substring(1));
                 let i_page = parseInt(type.get("page"));
+                let i_text = type.get("text");
+                let i_type = parseInt(type.get("type"));
                 td7 = document.getElementById("id_table_book_list");
                 if (Math.ceil(a) != (i_page + 1)) {
-                    td7.innerHTML += " <a href='Index_next?i=" + Math.ceil(a - 1) + "'>" + Math.ceil(a) + "</a>";
+                    td7.innerHTML += " <a href='search_result?type=" + i_type + "&text=" + i_text + "&page=" +Math.ceil(a - 1) + "'>" + Math.ceil(a) + "</a>";
                 }
             }
+        
         });
-           
   
         
     </script>
