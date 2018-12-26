@@ -67,10 +67,10 @@ namespace library.Controllers
             {
                 library_globalContext db = new library_globalContext();
                 string username = User.Identity.Name;
-                // Get the userprofile
+                
                 Клиенты user = db.Клиенты.FirstOrDefault(u => u.Login.Equals(username));
 
-                // Update fields
+                
                 string filename = Path.GetFileNameWithoutExtension(userprofile.ImageFile.FileName);
                 string extension = Path.GetExtension(userprofile.ImageFile.FileName);
                 user.Имя = userprofile.Имя;
@@ -85,11 +85,11 @@ namespace library.Controllers
                 filename = Path.Combine(Server.MapPath("~/img/avatars"), filename);
                 userprofile.ImageFile.SaveAs(filename);
                 
-                db.Клиенты.Update(user); //requires using System.Data.Entity.Migrations;
+                db.Клиенты.Update(user);
                 db.SaveChanges();
                 
 
-                return RedirectToAction("profile", "account"); // or whatever
+                return RedirectToAction("profile", "account"); 
             }
 
             return View(userprofile);

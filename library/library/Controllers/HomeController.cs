@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +12,33 @@ namespace library.Controllers
     public class HomeController : Controller
     {
         library_globalContext db = new library_globalContext();
+        public ActionResult page()
+        {
+
+
+            return View();
+        }
+        [HttpGet]
+        public JsonResult page_result(int id_book)
+        {
+
+            var books_info = (from a in db.Книги
+                              join b in db.Авторы on a.IdАвтора equals b.IdАвтора
+                              orderby a.IdКниги descending
+                              where a.IdКниги == id_book
+                              select new
+                              {
+                                  id_book = a.IdКниги,
+                                  Название = a.НазваниеКниги,
+                                  Img = a.ImgSrc,
+                                  описание = a.Описание,
+                                  автор = b.Фио,
+                                  Дата = a.ДатаДобавления,
+                                  Рейтинг = a.Рейтинг
+
+                              }).ToList();
+            return Json(books_info, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult add_books()
         {
@@ -18,7 +46,44 @@ namespace library.Controllers
 
             return View();
         }
-        
+
+
+        [HttpPost]
+        public ActionResult add_books(Книги books, int id_avtor)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                library_globalContext db = new library_globalContext();
+                Книги model = new Книги();
+                string filename = Path.GetFileNameWithoutExtension(books.ImageFile_add_book.FileName);
+                string extension = Path.GetExtension(books.ImageFile_add_book.FileName);
+                
+                model.IdКниги = db.Книги.Max(u => u.IdКниги+1);
+                model.НазваниеКниги = books.НазваниеКниги;
+                model.Описание = books.Описание;
+                model.ДатаДобавления = DateTime.Now;
+                model.Рейтинг = 0;
+                model.IdАвтора = id_avtor;
+                filename = filename + DateTime.Now.ToString("ttmmssfff") + extension;
+                books.ImgSrc = "~/img/books/" + filename;
+                model.ImgSrc = filename;
+                filename = Path.Combine(Server.MapPath("~/img/books"), filename);
+                books.ImageFile_add_book.SaveAs(filename);
+
+                db.Книги.Add(model); //requires using System.Data.Entity.Migrations;
+                db.SaveChanges();
+
+
+                return RedirectToAction("index", "home"); // or whatever
+            }
+
+            return RedirectToAction("add_books", "home");
+        }
+
+
+
         public ActionResult search()
         {
 
@@ -49,6 +114,7 @@ namespace library.Controllers
 
                                select new
                                {
+                                   id_book = a.IdКниги,
                                    Название = a.НазваниеКниги,
                                    Img = a.ImgSrc,
                                    описание = a.Описание,
@@ -66,6 +132,7 @@ namespace library.Controllers
                                where b.Фио.Contains(text)
                                select new
                                {
+                                   id_book = a.IdКниги,
                                    Название = a.НазваниеКниги,
                                    Img = a.ImgSrc,
                                    описание = a.Описание,
@@ -83,6 +150,7 @@ namespace library.Controllers
                                where b.Фио.Contains(text)
                                select new
                                {
+                                   id_book = a.IdКниги,
                                    Название = a.НазваниеКниги,
                                    Img = a.ImgSrc,
                                    описание = a.Описание,
@@ -108,9 +176,10 @@ namespace library.Controllers
                                join b in db.Авторы on a.IdАвтора equals b.IdАвтора
                                orderby a.IdКниги descending
                                where a.НазваниеКниги.Contains(text2) || a.НазваниеКниги.Contains(text)
-                               
+
                                select new
-                                  {
+                               {
+                                      id_book = a.IdКниги,
                                       Название = a.НазваниеКниги,
                                       Img = a.ImgSrc,
                                       описание = a.Описание,
@@ -127,6 +196,7 @@ namespace library.Controllers
                                   where b.Фио.Contains(text)
                                   select new
                                   {
+                                      id_book = a.IdКниги,
                                       Название = a.НазваниеКниги,
                                       Img = a.ImgSrc,
                                       описание = a.Описание,
@@ -143,6 +213,7 @@ namespace library.Controllers
                                   where b.Фио.Contains(text)
                                   select new
                                   {
+                                      id_book = a.IdКниги,
                                       Название = a.НазваниеКниги,
                                       Img = a.ImgSrc,
                                       описание = a.Описание,
@@ -170,7 +241,8 @@ namespace library.Controllers
                               join b in db.Авторы on a.IdАвтора equals b.IdАвтора
                               orderby a.IdКниги descending
                               select new
-                             {
+                              {
+                                 id_book = a.IdКниги,
                                  Название = a.НазваниеКниги,
                                  Img = a.ImgSrc,
                                  описание = a.Описание,
@@ -209,6 +281,19 @@ namespace library.Controllers
         }
 
         [HttpGet]
+        public JsonResult Index_avtors()
+        {
+            var avtor_json = (from a in db.Авторы
+                              select new
+                              {
+                                 id_avtor = a.IdАвтора,
+                                 фио = a.Фио
+                              }).ToList();
+
+            return Json(avtor_json, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public JsonResult Index_book_json(int i)
         {
             int count_books = db.Книги.Count();
@@ -219,6 +304,7 @@ namespace library.Controllers
 
                               select new
                               {
+                                  id_book = a.IdКниги,
                                   Название = a.НазваниеКниги,
                                   Img = a.ImgSrc,
                                   описание = a.Описание,

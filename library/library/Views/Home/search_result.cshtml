@@ -114,7 +114,7 @@
       
                     $.each(data, function (i, item) {
                         ba++;
-                        addTable3(item.Название, item.Img, ba, item.описание, item.автор, item.Дата, item.Рейтинг, total);
+                        addTable3(item.Название, item.Img, ba, item.описание, item.автор, item.Дата, item.Рейтинг, total, item.id_book);
                     })
                 }
             })
@@ -129,7 +129,7 @@
             })
         
            
-        function addTable3(a, b, c, d, e, f, j, k) {
+        function addTable3(a, b, c, d, e, f, j, k, l) {
                 let type = new URLSearchParams(document.location.search.substring(1));
                 let i_page = parseInt(type.get("page"));
                 let i_text = type.get("text");
@@ -150,7 +150,7 @@
                 var td6 = document.getElementById(test6);
                 td4.innerHTML = "Автор:" + e;
                 td3.innerHTML = d.substring(0, 100) + "...";
-                td.innerHTML = a.substring(0, 30);
+                td.innerHTML = "<a href='page?id_book=" + l + "'>" + a.substring(0, 30) + "</a>";
                 var img = document.createElement("img");
                 img.src = '/img/books/' + b;
                 img.width = 100;
