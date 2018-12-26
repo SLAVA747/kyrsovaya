@@ -463,7 +463,7 @@
     <Compile Include="Models\Жанры.cs" />
     <Compile Include="Models\Клиенты.cs" />
     <Compile Include="Models\Книги.cs" />
-    <Compile Include="Models\Комментарии1.cs" />
+    <Compile Include="Models\Комментарии.cs" />
     <Compile Include="Models\Полка.cs" />
     <Compile Include="Models\СистемаШтрафов.cs" />
     <Compile Include="Models\Читатели.cs" />

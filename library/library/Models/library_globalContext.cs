@@ -22,7 +22,7 @@ namespace library.Models
         public virtual DbSet<Жанры> Жанры { get; set; }
         public virtual DbSet<Клиенты> Клиенты { get; set; }
         public virtual DbSet<Книги> Книги { get; set; }
-        public virtual DbSet<Комментарии1> Комментарии1 { get; set; }
+        public virtual DbSet<Комментарии> Комментарии { get; set; }
         public virtual DbSet<Полка> Полка { get; set; }
         public virtual DbSet<Читатели> Читатели { get; set; }
         public virtual DbSet<Штрафы> Штрафы { get; set; }
@@ -206,7 +206,7 @@ namespace library.Models
                 entity.Property(e => e.НазваниеКниги).HasColumnName("Название_Книги");
             });
 
-            modelBuilder.Entity<Комментарии1>(entity =>
+            modelBuilder.Entity<Комментарии>(entity =>
             {
                 entity.HasKey(e => e.IdКомментария)
                     .HasName("комментарии_pk");

@@ -19,12 +19,30 @@ namespace library.Controllers
             return View();
         }
         [HttpGet]
+        public JsonResult page_result_comments(int id_book)
+        {
+
+            var comment_info = (from a in db.Комментарии
+                              join b in db.Клиенты on a.IdКлиента equals b.IdКлиента
+                              join c in db.Книги on a.IdКниги equals c.IdКниги
+
+                                where a.IdКниги == id_book
+                                orderby a.IdКомментария descending
+                                select new
+                              {
+                                  Фамилия = b.Фамилия,
+                                  текст = a.Text,
+                                  image = b.Avatar
+                              }).ToList().Take(10);
+            return Json(comment_info, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
         public JsonResult page_result(int id_book)
         {
 
             var books_info = (from a in db.Книги
                               join b in db.Авторы on a.IdАвтора equals b.IdАвтора
-                              orderby a.IdКниги descending
+ 
                               where a.IdКниги == id_book
                               select new
                               {
@@ -351,7 +369,7 @@ namespace library.Controllers
         public JsonResult Index_comments()
         {
 
-            var com_info = (from a in db.Комментарии1
+            var com_info = (from a in db.Комментарии
                             join b in db.Клиенты on a.IdКлиента equals b.IdКлиента
                             orderby a.IdКомментария descending
                             select new

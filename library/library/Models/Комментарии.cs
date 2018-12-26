@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace library.Models
 {
-    public partial class Комментарии1
+    public partial class Комментарии
     {
         public int IdКомментария { get; set; }
         public int? IdКлиента { get; set; }
