@@ -10,7 +10,7 @@ namespace library.Models
     {
         public Клиенты()
         {
-            Комментарии1 = new HashSet<Комментарии1>();
+            Комментарии1 = new HashSet<Комментарии>();
             Читатели = new HashSet<Читатели>();
         }
 
@@ -31,7 +31,7 @@ namespace library.Models
         public string Avatar { get; set; }
 
         public virtual Role IdRoleNavigation { get; set; }
-        public virtual ICollection<Комментарии1> Комментарии1 { get; set; }
+        public virtual ICollection<Комментарии> Комментарии1 { get; set; }
         public virtual ICollection<Читатели> Читатели { get; set; }
         [NotMapped]
         public HttpPostedFileBase ImageFile { get; set; }

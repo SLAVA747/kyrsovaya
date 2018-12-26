@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -462,7 +463,7 @@
     <Compile Include="Models\Жанры.cs" />
     <Compile Include="Models\Клиенты.cs" />
     <Compile Include="Models\Книги.cs" />
-    <Compile Include="Models\Комментарии1.cs" />
+    <Compile Include="Models\Комментарии.cs" />
     <Compile Include="Models\Полка.cs" />
     <Compile Include="Models\СистемаШтрафов.cs" />
     <Compile Include="Models\Читатели.cs" />
@@ -858,6 +859,7 @@
     <Content Include="Views\Home\search.cshtml" />
     <Content Include="Views\Home\search_result.cshtml" />
     <Content Include="Views\Home\Index_next.cshtml" />
+    <Content Include="Views\Home\page.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

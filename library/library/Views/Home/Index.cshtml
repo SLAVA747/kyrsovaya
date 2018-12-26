@@ -4,44 +4,7 @@
 
 </head>
 <body>
-    <!-- <table id="jqg"></table>
-     <div id="jpager"></div>
-     <script type="text/javascript" charset="utf-8">
-         $("#jqg").jqGrid({
-             url: '/Home/Index_library',
-             datatype: "json",
-             colNames: ['Id полки', 'Название книги', 'ФИО Автора', 'Жанр'],
-             colModel: [
-                 { name: 'Id_полки', index: 'Id_полки', width: 150, sortable: true, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                 { name: 'Название_книги', index: 'Название_книги', width: 150, sortable: true, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                 { name: 'ФИО_Автора', index: 'ФИО_Автора', width: 150, sortable: true, searchoptions: { sopt: ['eq', 'ne', 'cn'] } },
-                 { name: 'Жанр', index: 'Жанр', width: 250, sortable: true, searchoptions: { sopt: ['eq', 'ne', 'cn'] } }
-             ],
-             rowNum: 10, // число отображаемых строк
-             pager: '#jpager',
-             loadonce: true, // загрузка только один раз
-             sortname: 'Id_полки', // сортировка по умолчанию по столбцу Id
-             sortorder: "desc", // порядок сортировки
-             caption: "Список Книг"
-
-
-
-
-         });
-         $("#jqg").jqGrid('navGrid', '#jpager', {
-             add: false,
-             del: false,
-             edit: false,
-             search: true,
-             searchtext: "Поиск",
-             refresh: true,
-             refreshtext: "Обновить"
-         });
-
-     </script>-->
-    
     <table border="1" id="table_main">
-        <!--Ячейка1-->
         <tr>
             <td colspan="3" id="id_table_book_title1" align="center">Ячейка 1</td>
             <td colspan="3" id="id_table_book_title2" align="center">Ячейка 1 </td>
@@ -66,7 +29,6 @@
             <td id="id_table_book_date3">Ячейка 2</td>
             <td id="id_table_book_rate3">Ячейка 3</td>
         </tr>
-        <!--Ячейка2-->
         <tr>
             <td colspan="3" id="id_table_book_title4" align="center">Ячейка 1</td>
             <td colspan="3" id="id_table_book_title5" align="center">Ячейка 1</td>
@@ -91,7 +53,6 @@
             <td id="id_table_book_date6">Ячейка 2</td>
             <td id="id_table_book_rate6">Ячейка 3</td>
         </tr>
-        <!--Ячейка3-->
         <tr>
             <td colspan="3" id="id_table_book_title7" align="center">Ячейка 1</td>
             <td colspan="3" id="id_table_book_title8" align="center">Ячейка 1</td>
@@ -116,7 +77,6 @@
             <td id="id_table_book_date9">Ячейка 2</td>
             <td id="id_table_book_rate9">Ячейка 3</td>
         </tr>
-        <!--Ячейка_смена-->
         <tr>
             <td colspan="9" id="id_table_book_list" align="center">1..n</td>
         </tr>
@@ -125,7 +85,6 @@
     <script>
         ba = 0;
         total = 0;
-        // Комментарии
         $.ajax({
             url: "/home/Index_books/",
             type: 'GET',
@@ -136,12 +95,12 @@
                     ba++;
                     if (ba < 10) {
                         total = (data.length + 1) / 9;
-                        addTable3(item.Название, item.Img, ba, item.описание, item.автор, item.Дата, item.Рейтинг, total);
+                        addTable3(item.Название, item.Img, ba, item.описание, item.автор, item.Дата, item.Рейтинг, total, item.id_book);
                     }
                 });
             },
         });
-        function addTable3(a, b, c, d, e, f, j, k) {
+        function addTable3(a, b, c, d, e, f, j, k, l) {
             var convert = c.toString();
             var test1 = "id_table_book_title" + convert;
             var test2 = "id_table_book_img" + convert;
@@ -158,7 +117,7 @@
             var td6 = document.getElementById(test6);
             td4.innerHTML = "Автор:" + e;
             td3.innerHTML = d.substring(0, 100) + "...";
-            td.innerHTML = a.substring(0, 30);
+            td.innerHTML = "<a href='home/page?id_book="+l+"'>"+a.substring(0, 30)+ "</a>";
             var img = document.createElement("img");
             img.src = '/img/books/' + b;
             img.width = 100;
