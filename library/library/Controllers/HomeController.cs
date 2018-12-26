@@ -18,6 +18,60 @@ namespace library.Controllers
 
             return View();
         }
+        [HttpPost]
+        public JsonResult readers_json(int i)
+        {
+            var users_info = (from a in db.ВыдачаКниг
+                              join b in db.Читатели on a.IdЧитателя equals b.IdЧитателя
+                              join c in db.Клиенты on b.IdКлиента equals c.IdКлиента
+                              join d in db.Штрафы on a.IdШтрафа equals d.IdШтрафа
+                              join e in db.Полка on a.IdПолки equals e.IdПолки
+                              join f in db.Книги on e.IdКниги equals f.IdКниги
+                              orderby a.ДатаВыдачи descending
+                              select new
+                              {
+                                  id = c.IdКлиента,
+                                  аватар = c.Avatar,
+                                  Фамилия = c.Фамилия,
+                                  Имя = c.Имя,
+                                  Отчество = c.Отчество,
+                                  login = c.Login,
+                                  Дата_Выдачи = a.ДатаВыдачи,
+                                  Ожид_дата = a.ОжидаемаяДатаВозврата,
+                                  Факт_дата = a.ФактическаяДатаВозврата,
+                                  Штраф = d.ШтрафнаяСумма,
+                                  Названае_Книги = f.НазваниеКниги
+                              }).ToList().Skip(i*20).Take(20);
+            return Json(users_info, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public JsonResult readers_json()
+        {
+
+            var users_info = (from a in db.ВыдачаКниг
+                              join b in db.Читатели on a.IdЧитателя equals b.IdЧитателя
+                              join c in db.Клиенты on b.IdКлиента equals c.IdКлиента
+                              join d in db.Штрафы on a.IdШтрафа equals d.IdШтрафа
+                              join e in db.Полка on a.IdПолки equals e.IdПолки
+                              join f in db.Книги on e.IdКниги equals f.IdКниги
+                              orderby a.ДатаВыдачи descending
+                              select new
+                                {
+                                    id = c.IdКлиента,
+                                    аватар = c.Avatar,
+                                    Фамилия = c.Фамилия,
+                                    Имя = c.Имя,
+                                    Отчество = c.Отчество,
+                                    login = c.Login,
+                                    Дата_Выдачи = a.ДатаВыдачи,
+                                    Ожид_дата = a.ОжидаемаяДатаВозврата,
+                                    Факт_дата = a.ФактическаяДатаВозврата,
+                                    Штраф = d.ШтрафнаяСумма,
+                                    Названае_Книги = f.НазваниеКниги
+                                }).ToList().Take(20);
+            return Json(users_info, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public JsonResult page_result_comments(int id_book)
         {

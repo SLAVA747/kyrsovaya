@@ -4,38 +4,343 @@
 
 </head>
 <body>
-    <table id="jqg"></table>
-    <div id="jpager"></div>
-    <script type="text/javascript" charset="utf-8">
-        $("#jqg").jqGrid({
-            url: '/Home/Index_readers',
-            datatype: "json",
-            colNames: ['Id читателя', 'Фамилия', 'Имя', 'Отчество', 'Вид контакта', 'Контактные данные', 'Адрес'],
-            colModel: [
-                { name: 'Id_читателя', index: 'Id_читателя', width: 50, stype: 'text', sortable: true  },
-                { name: 'Фамилия', index: 'Фамилия', width: 100, sortable: true },
-                { name: 'Имя', index: 'Имя', width: 100, sortable: true },
-                { name: 'Отчество', index: 'Отчество', width: 100, sortable: true },
-                { name: 'Вид_контакта', index: 'Вид_контакта', width: 100, sortable: true },
-                { name: 'контактные_данные', index: 'контактные_данные', width: 250, sortable: true },
-                { name: 'адрес', index: 'адрес', width: 450, sortable: true }
-            ],
-            rowNum: 10, // число отображаемых строк
-            pager: '#jpager',
-            loadonce: true, // загрузка только один раз
-            sortname: 'Id_читателя', // сортировка по умолчанию по столбцу Id
-            sortorder: "desc", // порядок сортировки
-            caption: "Список читателей"
+    <table border="1" id="table_main">
+        <tr>
+            <td>id</td>
+            <td>id клиента:</td>
+            <td>Аватар:</td>
+            <td>ФИО:</td>
+            <td>Логин:</td>
+            <td>Название книги:</td>
+            <td>Дата выдачи:</td>
+            <td>Ожид. дата возврата:</td>
+            <td>Факт. дата возврата:</td>
+            <td>Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i1">id</td>
+            <td id="user_id1">id</td>
+            <td id="user_avatar1">Аватар</td>
+            <td id="user_fio1">ФИО</td>
+            <td id="user_login1">Логин</td>
+            <td id="user_book1">Название книги</td>
+            <td id="user_data_vidachi1">Дата выдачи:</td>
+            <td id="user_data_ojid1">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat1">Факт. дата возврата:</td>
+            <td id="user_shtraf1">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i2">id</td>
+            <td id="user_id2">id</td>
+            <td id="user_avatar2">Аватар</td>
+            <td id="user_fio2">ФИО</td>
+            <td id="user_login2">Логин</td>
+            <td id="user_book2">Название книги</td>
+            <td id="user_data_vidachi2">Дата выдачи:</td>
+            <td id="user_data_ojid2">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat2">Факт. дата возврата:</td>
+            <td id="user_shtraf2">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i3">id</td>
+            <td id="user_id3">id</td>
+            <td id="user_avatar3">Аватар</td>
+            <td id="user_fio3">ФИО</td>
+            <td id="user_login3">Логин</td>
+            <td id="user_book3">Название книги</td>
+            <td id="user_data_vidachi3">Дата выдачи:</td>
+            <td id="user_data_ojid3">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat3">Факт. дата возврата:</td>
+            <td id="user_shtraf3">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i4">id</td>
+            <td id="user_id4">id</td>
+            <td id="user_avatar4">Аватар</td>
+            <td id="user_fio4">ФИО</td>
+            <td id="user_login4">Логин</td>
+            <td id="user_book4">Название книги</td>
+            <td id="user_data_vidachi4">Дата выдачи:</td>
+            <td id="user_data_ojid4">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat4">Факт. дата возврата:</td>
+            <td id="user_shtraf4">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i5">id</td>
+            <td id="user_id5">id</td>
+            <td id="user_avatar5">Аватар</td>
+            <td id="user_fio5">ФИО</td>
+            <td id="user_login5">Логин</td>
+            <td id="user_book5">Название книги</td>
+            <td id="user_data_vidachi5">Дата выдачи:</td>
+            <td id="user_data_ojid5">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat5">Факт. дата возврата:</td>
+            <td id="user_shtraf5">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i6">id</td>
+            <td id="user_id6">id</td>
+            <td id="user_avatar6">Аватар</td>
+            <td id="user_fio6">ФИО</td>
+            <td id="user_login6">Логин</td>
+            <td id="user_book6">Название книги</td>
+            <td id="user_data_vidachi6">Дата выдачи:</td>
+            <td id="user_data_ojid6">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat6">Факт. дата возврата:</td>
+            <td id="user_shtraf6">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i7">id</td>
+            <td id="user_id7">id</td>
+            <td id="user_avatar7">Аватар</td>
+            <td id="user_fio7">ФИО</td>
+            <td id="user_login7">Логин</td>
+            <td id="user_book7">Название книги</td>
+            <td id="user_data_vidachi7">Дата выдачи:</td>
+            <td id="user_data_ojid7">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat7">Факт. дата возврата:</td>
+            <td id="user_shtraf7">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i8">id</td>
+            <td id="user_id8">id</td>
+            <td id="user_avatar8">Аватар</td>
+            <td id="user_fio8">ФИО</td>
+            <td id="user_login8">Логин</td>
+            <td id="user_book8">Название книги</td>
+            <td id="user_data_vidachi8">Дата выдачи:</td>
+            <td id="user_data_ojid8">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat8">Факт. дата возврата:</td>
+            <td id="user_shtraf8">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i9">id</td>
+            <td id="user_id9">id</td>
+            <td id="user_avatar9">Аватар</td>
+            <td id="user_fio9">ФИО</td>
+            <td id="user_login9">Логин</td>
+            <td id="user_book9">Название книги</td>
+            <td id="user_data_vidachi9">Дата выдачи:</td>
+            <td id="user_data_ojid9">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat9">Факт. дата возврата:</td>
+            <td id="user_shtraf9">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i10">id</td>
+            <td id="user_id10">id</td>
+            <td id="user_avatar10">Аватар</td>
+            <td id="user_fio10">ФИО</td>
+            <td id="user_login10">Логин</td>
+            <td id="user_book10">Название книги</td>
+            <td id="user_data_vidachi10">Дата выдачи:</td>
+            <td id="user_data_ojid10">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat10">Факт. дата возврата:</td>
+            <td id="user_shtraf10">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i11">id</td>
+            <td id="user_id11">id</td>
+            <td id="user_avatar11">Аватар</td>
+            <td id="user_fio11">ФИО</td>
+            <td id="user_login11">Логин</td>
+            <td id="user_book11">Название книги</td>
+            <td id="user_data_vidachi11">Дата выдачи:</td>
+            <td id="user_data_ojid11">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat11">Факт. дата возврата:</td>
+            <td id="user_shtraf11">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i12">id</td>
+            <td id="user_id12">id</td>
+            <td id="user_avatar12">Аватар</td>
+            <td id="user_fio12">ФИО</td>
+            <td id="user_login12">Логин</td>
+            <td id="user_book12">Название книги</td>
+            <td id="user_data_vidachi12">Дата выдачи:</td>
+            <td id="user_data_ojid12">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat12">Факт. дата возврата:</td>
+            <td id="user_shtraf12">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i13">id</td>
+            <td id="user_id13">id</td>
+            <td id="user_avatar13">Аватар</td>
+            <td id="user_fio13">ФИО</td>
+            <td id="user_login13">Логин</td>
+            <td id="user_book13">Название книги</td>
+            <td id="user_data_vidachi13">Дата выдачи:</td>
+            <td id="user_data_ojid13">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat13">Факт. дата возврата:</td>
+            <td id="user_shtraf13">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i14">id</td>
+            <td id="user_id14">id</td>
+            <td id="user_avatar14">Аватар</td>
+            <td id="user_fio14">ФИО</td>
+            <td id="user_login14">Логин</td>
+            <td id="user_book14">Название книги</td>
+            <td id="user_data_vidachi14">Дата выдачи:</td>
+            <td id="user_data_ojid14">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat14">Факт. дата возврата:</td>
+            <td id="user_shtraf14">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i15">id</td>
+            <td id="user_id15">id</td>
+            <td id="user_avatar15">Аватар</td>
+            <td id="user_fio15">ФИО</td>
+            <td id="user_login15">Логин</td>
+            <td id="user_book15">Название книги</td>
+            <td id="user_data_vidachi15">Дата выдачи:</td>
+            <td id="user_data_ojid15">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat15">Факт. дата возврата:</td>
+            <td id="user_shtraf15">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i16">id</td>
+            <td id="user_id16">id</td>
+            <td id="user_avatar16">Аватар</td>
+            <td id="user_fio16">ФИО</td>
+            <td id="user_login16">Логин</td>
+            <td id="user_book16">Название книги</td>
+            <td id="user_data_vidachi16">Дата выдачи:</td>
+            <td id="user_data_ojid16">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat16">Факт. дата возврата:</td>
+            <td id="user_shtraf16">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i17">id</td>
+            <td id="user_id17">id</td>
+            <td id="user_avatar17">Аватар</td>
+            <td id="user_fio17">ФИО</td>
+            <td id="user_login17">Логин</td>
+            <td id="user_book17">Название книги</td>
+            <td id="user_data_vidachi17">Дата выдачи:</td>
+            <td id="user_data_ojid17">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat17">Факт. дата возврата:</td>
+            <td id="user_shtraf17">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i18">id</td>
+            <td id="user_id18">id</td>
+            <td id="user_avatar18">Аватар</td>
+            <td id="user_fio18">ФИО</td>
+            <td id="user_login18">Логин</td>
+            <td id="user_book18">Название книги</td>
+            <td id="user_data_vidachi18">Дата выдачи:</td>
+            <td id="user_data_ojid18">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat18">Факт. дата возврата:</td>
+            <td id="user_shtraf18">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i19">id</td>
+            <td id="user_id19">id</td>
+            <td id="user_avatar19">Аватар</td>
+            <td id="user_fio19">ФИО</td>
+            <td id="user_login19">Логин</td>
+            <td id="user_book19">Название книги</td>
+            <td id="user_data_vidachi19">Дата выдачи:</td>
+            <td id="user_data_ojid19">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat19">Факт. дата возврата:</td>
+            <td id="user_shtraf19">Сумма штрафа:</td>
+        </tr>
+
+        <tr>
+            <td id="user_i20">id</td>
+            <td id="user_id20">id</td>
+            <td id="user_avatar20">Аватар</td>
+            <td id="user_fio20">ФИО</td>
+            <td id="user_login20">Логин</td>
+            <td id="user_book20">Название книги</td>
+            <td id="user_data_vidachi20">Дата выдачи:</td>
+            <td id="user_data_ojid20">Ожид. дата возврата:</td>
+            <td id="user_fact_data_vozvrat20">Факт. дата возврата:</td>
+            <td id="user_shtraf20">Сумма штрафа:</td>
+        </tr>
+    </table>
+
+    <script>
+        ba = 0;
+        total = 0;
+        $.ajax({
+            url: "/home/readers_json/",
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+
+                $.each(data, function (i, item) {
+                    addTable3(item.id, item.аватар, item.Фамилия, item.Имя, item.Отчество, item.login , item.Дата_Выдачи, item.Ожид_дата, item.Факт_дата, item.Штраф, item.Названае_Книги ,i);
+
+                });
+            },
         });
-        $("#jqg").jqGrid('navGrid', '#jpager', {
-            add: false,
-            del: false,
-            edit: false,
-            search: true,
-            searchtext: "Поиск",
-            refresh: true,
-            refreshtext: "Обновить"
-        });
+        function addTable3(a, b, c, d, e, f, j, k, l, x, y, z) {
+            z++;
+            var convert = z.toString();
+            var test1 = "user_id" + convert;
+            var test2 = "user_avatar" + convert;
+            var test3 = "user_fio" + convert;
+            var test4 = "user_login" + convert;
+            var test5 = "user_data_vidachi" + convert;
+            var test6 = "user_data_ojid" + convert;
+            var test7 = "user_fact_data_vozvrat" + convert;
+            var test8 = "user_shtraf" + convert;
+            var test9 = "user_book" + convert;
+            var test10 = "user_i" + convert;
+            
+            var td = document.getElementById(test1);
+            var td2 = document.getElementById(test2);
+            var td3 = document.getElementById(test3);
+            var td4 = document.getElementById(test4);
+            var td5 = document.getElementById(test5);
+            var td6 = document.getElementById(test6);
+            var td7 = document.getElementById(test7);
+            var td8 = document.getElementById(test8);
+            var td9 = document.getElementById(test9);
+            var td10 = document.getElementById(test10);
+            td.innerHTML = a;
+            var img = document.createElement("img");
+            img.src = '/img/avatars/' + b;
+            img.width = 30;
+            img.height = 30;
+            td2.appendChild(img);
+            td3.innerHTML = c + " " + d + " " + e;
+            td4.innerHTML = f;
+            td9.innerHTML = y;
+            td5.innerHTML = "Дата выдачи";
+            td6.innerHTML = "Ожидаемая дата";
+            td7.innerHTML = "Фактическая дата";
+            td8.innerHTML = "Фактическая дата";
+            td10.innerHTML = z;
+
+        };
+
     </script>
+
+
+  
+
+
+
 </body>
 </html>
