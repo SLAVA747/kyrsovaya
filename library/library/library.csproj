@@ -860,6 +860,8 @@
     <Content Include="Views\Home\search_result.cshtml" />
     <Content Include="Views\Home\Index_next.cshtml" />
     <Content Include="Views\Home\page.cshtml" />
+    <Content Include="Views\Home\user_profile.cshtml" />
+    <Content Include="Views\Home\user_profile_edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
