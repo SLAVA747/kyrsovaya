@@ -49,8 +49,8 @@
                             if (User.IsInRole("Admin"))
                             {
                                 
-                                <li>@Html.ActionLink("Читатели", "readers", "Home", new { area = "" }, null)</li>
-                                <li>@Html.ActionLink("Список выданных книг", "SVK", "Home", new { area = "" }, null)</li>
+                                <li>@Html.ActionLink("Список выданных книг", "readers", "Home", new { area = "" }, null)</li>
+                                <li>@Html.ActionLink("Читатели", "SVK", "Home", new { area = "" }, null)</li>
                                 <li>@Html.ActionLink("Добавить книгу", "add_books", "Home", new { area = "" }, null)</li>
                             }
                                 <li>@Html.ActionLink("Поиск", "search_result", "Home", new { area = "" }, null)</li>
