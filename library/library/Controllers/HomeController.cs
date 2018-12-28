@@ -12,6 +12,112 @@ namespace library.Controllers
     public class HomeController : Controller
     {
         library_globalContext db = new library_globalContext();
+        public ActionResult readers_list()
+        {
+
+
+            return View();
+        }
+
+
+        public JsonResult readers_list_json()
+        {
+            var users_info = (from c in db.Клиенты
+                              join e in db.Role on c.IdRole equals e.IdRole
+                              orderby c.IdКлиента
+                              select new
+                              {
+                                  id = c.IdКлиента,
+                                  аватар = c.Avatar,
+                                  Фамилия = c.Фамилия,
+                                  Имя = c.Имя,
+                                  Отчество = c.Отчество,
+                                  возраст =c.Age,
+                                  login = c.Login,
+                                  Рейтинг = c.Rate,
+                                  Роль = e.Name,
+                                  Книг_прочитано = c.BooksBack,
+                                  Взято_книг = c.BooksReads,
+                              }).ToList().Take(20);
+            return Json(users_info, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+        public ActionResult user_profile_edit(int IdКлиента)
+        {
+            Клиенты user = db.Клиенты.FirstOrDefault(u => u.IdКлиента.Equals(IdКлиента));
+
+            Клиенты model = new Клиенты();
+            model.Фамилия = user.Фамилия;
+            model.Имя = user.Имя;
+            model.Отчество = user.Отчество;
+            model.Age = user.Age;
+            model.Адрес = user.Адрес;
+            model.Password = user.Password;
+            model.Avatar = user.Avatar;
+
+            return View(model);
+        }
+
+        public ActionResult user_profile(int i)
+        {
+                Клиенты user = db.Клиенты.FirstOrDefault(u => u.IdКлиента.Equals(i));
+
+                Клиенты model = new Клиенты();
+                model.Фамилия = user.Фамилия;
+                model.Имя = user.Имя;
+                model.Отчество = user.Отчество;
+                model.Age = user.Age;
+                model.Адрес = user.Адрес;
+                model.BooksBack = user.BooksBack;
+                model.BooksReads = user.BooksReads;
+                model.Comments = user.Comments;
+                model.IdКлиента = user.IdКлиента;
+                model.Login = user.Login;
+                model.Avatar = user.Avatar;
+
+
+                return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult user_profile_edit(Клиенты userprofile)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                library_globalContext db = new library_globalContext();
+
+                Клиенты user = db.Клиенты.FirstOrDefault(u => u.IdКлиента.Equals(userprofile.IdКлиента));
+
+
+                string filename = Path.GetFileNameWithoutExtension(userprofile.ImageFile.FileName);
+                string extension = Path.GetExtension(userprofile.ImageFile.FileName);
+                user.Имя = userprofile.Имя;
+                user.Фамилия = userprofile.Фамилия;
+                user.Отчество = userprofile.Отчество;
+                user.Age = userprofile.Age;
+                user.Адрес = userprofile.Адрес;
+                user.Password = userprofile.Password;
+                filename = filename + DateTime.Now.ToString("ttmmssfff") + extension;
+                userprofile.Avatar = "~/img/avatars/" + filename;
+                user.Avatar = filename;
+                filename = Path.Combine(Server.MapPath("~/img/avatars"), filename);
+                userprofile.ImageFile.SaveAs(filename);
+
+                db.Клиенты.Update(user);
+                db.SaveChanges();
+
+
+                return RedirectToAction("index", "home");
+            }
+
+            return View(userprofile);
+        }
+
         public ActionResult page()
         {
 
