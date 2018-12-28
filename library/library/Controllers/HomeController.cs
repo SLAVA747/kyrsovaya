@@ -12,6 +12,38 @@ namespace library.Controllers
     public class HomeController : Controller
     {
         library_globalContext db = new library_globalContext();
+        public ActionResult readers_list()
+        {
+
+
+            return View();
+        }
+
+
+        public JsonResult readers_list_json()
+        {
+            var users_info = (from c in db.Клиенты
+                              join e in db.Role on c.IdRole equals e.IdRole
+                              orderby c.IdКлиента
+                              select new
+                              {
+                                  id = c.IdКлиента,
+                                  аватар = c.Avatar,
+                                  Фамилия = c.Фамилия,
+                                  Имя = c.Имя,
+                                  Отчество = c.Отчество,
+                                  возраст =c.Age,
+                                  login = c.Login,
+                                  Рейтинг = c.Rate,
+                                  Роль = e.Name,
+                                  Книг_прочитано = c.BooksBack,
+                                  Взято_книг = c.BooksReads,
+                              }).ToList().Take(20);
+            return Json(users_info, JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
         public ActionResult user_profile_edit(int IdКлиента)
         {
