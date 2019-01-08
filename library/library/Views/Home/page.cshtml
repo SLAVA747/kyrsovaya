@@ -117,7 +117,8 @@
                 let types = new URLSearchParams(document.location.search.substring(1));
                 var test1 = "test";
                 var td = document.getElementById(test1);
-                td.innerHTML += "<form action='page'> <input type='text' name='page' value='" + parseInt(types.get("id_book")) + "'/><br><textarea rows='3' cols='50' name='text'></textarea> <br> <input type='submit' value = 'Оставить комментарий' > </form>"
+                
+                td.innerHTML += "<form action='Page_savecomment'> <input type='text' name='id_book' value='" + parseInt(types.get("id_book")) + "'/><br><textarea rows='3' cols='50' name='text'></textarea> <br> <input type='submit' value = 'Оставить комментарий' > </form>"
             </script>
 
 

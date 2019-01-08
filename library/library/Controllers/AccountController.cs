@@ -19,10 +19,8 @@ namespace library.Controllers
         {
             string username = User.Identity.Name;
             library_globalContext db = new library_globalContext();
-            // Fetch the userprofile
             Клиенты user = db.Клиенты.FirstOrDefault(u => u.Login.Equals(username));
 
-            // Construct the viewmodel
             Клиенты model = new Клиенты();
             model.Фамилия = user.Фамилия;
             model.Имя = user.Имя;

@@ -117,12 +117,28 @@ namespace library.Controllers
 
             return View(userprofile);
         }
-
-        public ActionResult page()
+        public ActionResult Page()
         {
 
 
             return View();
+        }
+  
+        public ActionResult Page_savecomment(int id_book, string text)
+        {
+
+            library_globalContext db = new library_globalContext();
+            string username = User.Identity.Name;
+            Клиенты user = db.Клиенты.FirstOrDefault(u => u.Login.Equals(username));
+            Комментарии model = new Комментарии();
+            model.IdКлиента = user.IdКлиента;
+            model.IdКниги = id_book;
+            model.Text = text;
+            model.IdКомментария = db.Комментарии.Max(u => u.IdКомментария+1);
+            db.Комментарии.Add(model);
+            db.SaveChanges();
+
+            return View("~/Views/home/page.cshtml");
         }
         [HttpPost]
         public JsonResult readers_json(int i)
@@ -534,6 +550,7 @@ namespace library.Controllers
                             orderby a.IdКомментария descending
                             select new
                             {
+                                id = b.IdКлиента,
                                 Фамилия = b.Фамилия,
                                 id_юзера = b.IdКлиента,
                                 Комментарий = a.Text,
